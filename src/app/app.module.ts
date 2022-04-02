@@ -17,6 +17,10 @@ import { URequestComponent } from './user-area/u-request/u-request.component';
 import { UProfileComponent } from './user-area/u-profile/u-profile.component';
 import { AProfileComponent } from './admin-area/a-profile/a-profile.component';
 import { ADocumentTypesComponent } from './admin-area/a-document-types/a-document-types.component';
+import { MyMaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HomeComponent} from './home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +38,15 @@ import { ADocumentTypesComponent } from './admin-area/a-document-types/a-documen
     URequestComponent,
     UProfileComponent,
     AProfileComponent,
-    ADocumentTypesComponent
+    ADocumentTypesComponent,
+    HomeComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MyMaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
