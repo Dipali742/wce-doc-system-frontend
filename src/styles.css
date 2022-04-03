@@ -3,3 +3,14 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* div.container {
+    margin:0 40px;
+}
+.controles-container > * {
+    width: 100%;
+    }
+
+    .add-bottom-padding{
+        padding-bottom: 10px;
+    } */

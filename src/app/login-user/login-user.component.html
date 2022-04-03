@@ -1,1 +1,49 @@
-<mat-card>User login</mat-card>
+<div *ngIf="isLoggedIn" >
+    <mat-card class="center">
+        <div class="center">
+        Forbidden
+        </div>
+    </mat-card>
+</div>
+<div *ngIf="!isLoggedIn" >
+    <mat-card>
+        <mat-card-content>
+            <h1  class="center">USER LOGIN</h1>
+            <hr>
+            <form class="center" [formGroup]="loginForm">
+                <div  class="ng-grid">
+                    <div >
+                        <mat-form-field >
+                            <mat-label>Username</mat-label>
+                            <input formControlName="username" matInput type="text"  required  placeholder="2018BTECS00029" >
+                            <mat-icon matSuffix>account_circle</mat-icon>
+                            <mat-error >This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" required formControlName="password" placeholder="ABC@123">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error >This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions class="center">
+            <button mat-raised-button color="primary" type="submit" (click)="Onsubmit()" [disabled]="!loginForm.valid">
+                 Login    
+            </button>   
+        </mat-card-actions>  
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="isLoginFailed"
+        >
+          Login failed: {{ errorMessage }}
+        </div>
+    </mat-card>
+</div>

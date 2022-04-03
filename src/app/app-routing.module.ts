@@ -4,6 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import {AboutUsComponent} from './about-us/about-us.component';
+import { ADashboardComponent } from './admin-area/a-dashboard/a-dashboard.component';
+import { UDashboardComponent } from './user-area/u-dashboard/u-dashboard.component';
+
 
 const routes: Routes = [];
 
@@ -14,8 +17,9 @@ const routes: Routes = [];
     { path: 'admin-login', component: LoginAdminComponent },
     { path: 'user-login', component: LoginUserComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'about-us', component: AboutUsComponent }
-   
+    { path: 'about-us', component: AboutUsComponent },
+    { path: 'admin-dashboard', component: ADashboardComponent},
+    { path: 'user-dashboard', component: UDashboardComponent}
   ]),
 ],
   exports: [RouterModule]

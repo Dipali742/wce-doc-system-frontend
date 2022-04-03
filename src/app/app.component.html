@@ -1,17 +1,16 @@
 
- <p>
-   <mat-toolbar color="primary">
-      
+ <div >
+   <mat-toolbar color="primary">  
       <div>
          Walchand College of Engineering, Sangli
       </div>
       <div class="spacer"></div>
       <a  mat-button  routerLink="home">Home</a>
-      <a  mat-button  routerLink="admin-login">Admin Login</a>
-      <a  mat-button  routerLink="user-login">Student Login</a>
+      <a  mat-button *ngIf="!isLoggedIn" routerLink="admin-login">Admin Login</a>
+      <a  mat-button *ngIf="!isLoggedIn" routerLink="user-login">User Login</a>
       <a  mat-button  routerLink="about-us">About Us</a>
+      <a mat-button *ngIf="isLoggedIn" (click)="logout()" >Logout</a>
    </mat-toolbar>
-   
- </p>
+</div>
  
  <router-outlet></router-outlet>
