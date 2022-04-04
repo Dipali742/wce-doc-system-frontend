@@ -44,7 +44,7 @@ export class LoginUserComponent implements OnInit {
     if(localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
       if(this.sharedvar.isLoggedIn && this.sharedvar.isAdmin) {
-        this.router.navigate(['/wds/user-dashboard']);
+        this.router.navigate(['/user-dashboard']);
       }
     }
   }
@@ -63,13 +63,13 @@ export class LoginUserComponent implements OnInit {
           let token = "2 "+this.userData.username+" "+this.userData.password;
           localStorage.clear();
           localStorage.setItem('InfoWCEDoc',token);
-          this.router.navigate(['/wds/user-dashboard']);
+          this.router.navigate(['/user-dashboard']);
         }
         else {
           this.isLoginFailed = true;
           this.errorMessage = 'Invalid username/password';
           this.sharedvar.isLoggedIn = false;
-          // this.router.navigate(['/wds/user-dashboard']);
+          // this.router.navigate(['/user-dashboard']);
         }
         console.log(data);
       },

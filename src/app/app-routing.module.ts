@@ -21,21 +21,21 @@ const routes: Routes = [];
 @NgModule({
   
   imports: [RouterModule.forRoot([
-    { path: '', redirectTo: '/wds/home', pathMatch: 'full' },
-    { path: 'wds/admin-login', component: LoginAdminComponent },
-    { path: 'wds/user-login', component: LoginUserComponent },
-    { path: 'wds/home', component: HomeComponent },
-    { path: 'wds/about-us', component: AboutUsComponent },
-    { path: 'wds/admin-dashboard', component: ADashboardComponent},
-    { path: 'wds/user-dashboard', component: UDashboardComponent},
-    { path: 'wds/user-profile', component: UProfileComponent},
-    { path: 'wds/user-request', component: URequestComponent},
-    { path: 'wds/user-documents', component: UDocumentsComponent},
-    { path: 'wds/admin-profile', component: AProfileComponent},
-    { path: 'wds/admin-allUsers', component: AAllUsersComponent},
-    { path: 'wds/admin-allRequests', component: ARequestComponent},
-    { path: 'wds/admin-documentTypes', component: ADocumentTypesComponent},
-    { path: 'wds/admin-userLogs', component: ALogsComponent}
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'admin-login', component: LoginAdminComponent },
+    { path: 'user-login', component: LoginUserComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'about-us', component: AboutUsComponent },
+    { path: 'admin-dashboard', component: ADashboardComponent},
+    { path: 'user-dashboard', component: UDashboardComponent},
+    { path: 'user-profile', component: UProfileComponent},
+    { path: 'user-request', component: URequestComponent},
+    { path: 'user-documents', component: UDocumentsComponent},
+    { path: 'admin-profile', component: AProfileComponent},
+    { path: 'admin-allUsers', component: AAllUsersComponent},
+    { path: 'admin-allRequests', component: ARequestComponent},
+    { path: 'admin-documentTypes', component: ADocumentTypesComponent},
+    { path: 'admin-userLogs', component: ALogsComponent}
   ]),
 ],
   exports: [RouterModule]
