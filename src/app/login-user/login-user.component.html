@@ -1,11 +1,11 @@
-<div *ngIf="isLoggedIn" >
+<div *ngIf="sharedvar.isLoggedIn" >
     <mat-card class="center">
         <div class="center">
         Forbidden
         </div>
     </mat-card>
 </div>
-<div *ngIf="!isLoggedIn" >
+<div *ngIf="!sharedvar.isLoggedIn" >
     <mat-card>
         <mat-card-content>
             <h1  class="center">USER LOGIN</h1>

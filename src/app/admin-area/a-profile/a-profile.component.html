@@ -1,1 +1,15 @@
-<p>a-profile works!</p>
+<div *ngIf="!sharedvar.isLoggedIn">
+    <mat-card >
+        Forbidden : Please login to access this page
+    </mat-card>
+</div>
+<div *ngIf="!sharedvar.isAdmin">
+    <mat-card >
+        You're user. Please login as admin to access this page
+    </mat-card>
+</div>
+<div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
+    <mat-card>
+        logged in as admin : {{sharedvar.isAdmin}}
+    </mat-card>
+</div>

@@ -5,11 +5,11 @@
          Walchand College of Engineering, Sangli
       </div>
       <div class="spacer"></div>
-      <a  mat-button  routerLink="home">Home</a>
-      <a  mat-button *ngIf="!isLoggedIn" routerLink="admin-login">Admin Login</a>
-      <a  mat-button *ngIf="!isLoggedIn" routerLink="user-login">User Login</a>
-      <a  mat-button  routerLink="about-us">About Us</a>
-      <a mat-button *ngIf="isLoggedIn" (click)="logout()" >Logout</a>
+      <a  mat-button  routerLink="wds/home">Home</a>
+      <a  mat-button *ngIf="!sharedvar.isLoggedIn" routerLink="wds/admin-login">Admin Login</a>
+      <a  mat-button *ngIf="!sharedvar.isLoggedIn" routerLink="wds/user-login">User Login</a>
+      <a  mat-button  routerLink="wds/about-us">About Us</a>
+      <a mat-button *ngIf="sharedvar.isLoggedIn" (click)="logout()" >Logout</a>
    </mat-toolbar>
 </div>
  

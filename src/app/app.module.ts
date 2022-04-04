@@ -9,8 +9,6 @@ import { AAllUsersComponent } from './admin-area/a-all-users/a-all-users.compone
 import { ALogsComponent } from './admin-area/a-logs/a-logs.component';
 import { ARequestComponent } from './admin-area/a-request/a-request.component';
 import { ADashboardComponent } from './admin-area/a-dashboard/a-dashboard.component';
-import { AdminMainComponent } from './admin-area/admin-main/admin-main.component';
-import { UserMainComponent } from './user-area/user-main/user-main.component';
 import { UDashboardComponent } from './user-area/u-dashboard/u-dashboard.component';
 import { UDocumentsComponent } from './user-area/u-documents/u-documents.component';
 import { URequestComponent } from './user-area/u-request/u-request.component';
@@ -33,8 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
     ALogsComponent,
     ARequestComponent,
     ADashboardComponent,
-    AdminMainComponent,
-    UserMainComponent,
     UDashboardComponent,
     UDocumentsComponent,
     URequestComponent,

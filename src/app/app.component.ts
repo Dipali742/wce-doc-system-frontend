@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SharedVariablesComponent } from './secrets/shared-variables';
+import { ActivatedRoute, LoadChildrenCallback, Router } from '@angular/router';
+import { LoadUserDataComponent } from './common/load-user-data';
+import { SharedVariablesComponent } from './common/shared-variables';
 
 @Component({
   selector: 'app-root',
@@ -11,23 +12,18 @@ export class AppComponent {
   title = 'wce-doc-system';
   isLoggedIn = false;
   
-  constructor(private sharedvar:SharedVariablesComponent,
+  constructor(public sharedvar:SharedVariablesComponent,
     private route: ActivatedRoute, 
-    private router: Router,) {
+    private router: Router,
+    private load_data: LoadUserDataComponent) {
     // this.isLoggedIn = this.sharedvar.isLoggedIn;
-    if(sessionStorage.getItem('InfoWCEDoc')) {
-      this.isLoggedIn = true;
+    if(localStorage['InfoWCEDoc']) {
+      this.load_data.onRefresh();
     }
   }
 
   logout() {
-    this.sharedvar.isLoggedIn = false;
-    this.sharedvar.adminInfo = null;
-    this.sharedvar.userInfo = null;
-    this.sharedvar.isAdmin = undefined;
-    this.router.navigate(['/home']);
-    sessionStorage.clear();
-    this.reload();
+    this.load_data.reset();
   }
 
   reload() {

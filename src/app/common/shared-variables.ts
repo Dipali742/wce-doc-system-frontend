@@ -8,5 +8,4 @@ export class SharedVariablesComponent {
     adminInfo = null;
     userInfo = null;
     isAdmin : any;
-    currentLoginAsAdmin = null;
 } 
