@@ -7,6 +7,9 @@ import {MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider';
+// import {Bre} from '@angular/cdk/layout';
 
 @NgModule({
 imports: [
@@ -16,7 +19,10 @@ imports: [
     MatCardModule,
     FlexLayoutModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatDividerModule,
+    // BreakpointObserverModule
 ],
 exports: [
     MatButtonModule,
@@ -25,7 +31,10 @@ exports: [
     MatCardModule,
     FlexLayoutModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatDividerModule,
+    // BreakpointObserver
 ],
  
 })

@@ -22,20 +22,23 @@ const routes: Routes = [];
   
   imports: [RouterModule.forRoot([
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'admin-login', component: LoginAdminComponent },
-    { path: 'user-login', component: LoginUserComponent },
     { path: 'home', component: HomeComponent },
     { path: 'about-us', component: AboutUsComponent },
-    { path: 'admin-dashboard', component: ADashboardComponent},
-    { path: 'user-dashboard', component: UDashboardComponent},
-    { path: 'user-profile', component: UProfileComponent},
-    { path: 'user-request', component: URequestComponent},
-    { path: 'user-documents', component: UDocumentsComponent},
-    { path: 'admin-profile', component: AProfileComponent},
-    { path: 'admin-allUsers', component: AAllUsersComponent},
-    { path: 'admin-allRequests', component: ARequestComponent},
-    { path: 'admin-documentTypes', component: ADocumentTypesComponent},
-    { path: 'admin-userLogs', component: ALogsComponent}
+    
+    { path: 'user/login', component: LoginUserComponent },
+    { path: 'user/dashboard', component: UDashboardComponent},
+    { path: 'user/profile', component: UProfileComponent},
+    { path: 'user/newRequest', component: URequestComponent},
+    { path: 'user/documents', component: UDocumentsComponent},
+    { path : 'user/myRequests', component: URequestComponent},
+
+    { path: 'admin/login', component: LoginAdminComponent },
+    { path: 'admin/dashboard', component: ADashboardComponent},
+    { path: 'admin/profile', component: AProfileComponent},
+    { path: 'admin/allUsers', component: AAllUsersComponent},
+    { path: 'admin/allRequests', component: ARequestComponent},
+    { path: 'admin/documentTypes', component: ADocumentTypesComponent},
+    { path: 'admin/userLogs', component: ALogsComponent}
   ]),
 ],
   exports: [RouterModule]
