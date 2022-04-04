@@ -1,15 +1,15 @@
 <div *ngIf="!sharedvar.isLoggedIn">
-    <mat-card >
+    <mat-card>
         Forbidden : Please login to access this page
     </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-    <mat-card >
+    <mat-card>
         You're admin. Please login as user to access this page
     </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
     <mat-card>
-        logged in as user : {{sharedvar.isAdmin}} : user/profile
+        logged in as user : {{sharedvar.isAdmin}}
     </mat-card>
 </div>

@@ -14,6 +14,9 @@ import { AAllUsersComponent } from './admin-area/a-all-users/a-all-users.compone
 import { ARequestComponent } from './admin-area/a-request/a-request.component';
 import { ADocumentTypesComponent } from './admin-area/a-document-types/a-document-types.component';
 import { ALogsComponent } from './admin-area/a-logs/a-logs.component';
+import { UHelpComponent } from './user-area/u-help/u-help.component';
+import { AHelpComponent } from './admin-area/a-help/a-help.component';
+import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.component';
 
 
 const routes: Routes = [];
@@ -25,12 +28,14 @@ const routes: Routes = [];
     { path: 'home', component: HomeComponent },
     { path: 'about-us', component: AboutUsComponent },
     
+
     { path: 'user/login', component: LoginUserComponent },
     { path: 'user/dashboard', component: UDashboardComponent},
     { path: 'user/profile', component: UProfileComponent},
     { path: 'user/newRequest', component: URequestComponent},
     { path: 'user/documents', component: UDocumentsComponent},
-    { path : 'user/myRequests', component: URequestComponent},
+    { path: 'user/myRequests', component: UMyRequestComponent},
+    { path: 'user/help', component: UHelpComponent },
 
     { path: 'admin/login', component: LoginAdminComponent },
     { path: 'admin/dashboard', component: ADashboardComponent},
@@ -38,7 +43,9 @@ const routes: Routes = [];
     { path: 'admin/allUsers', component: AAllUsersComponent},
     { path: 'admin/allRequests', component: ARequestComponent},
     { path: 'admin/documentTypes', component: ADocumentTypesComponent},
-    { path: 'admin/userLogs', component: ALogsComponent}
+    { path: 'admin/userLogs', component: ALogsComponent},
+    { path: 'admin/help', component: AHelpComponent }
+
   ]),
 ],
   exports: [RouterModule]
