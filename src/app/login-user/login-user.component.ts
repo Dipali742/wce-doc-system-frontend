@@ -64,6 +64,7 @@ export class LoginUserComponent implements OnInit {
           localStorage.clear();
           localStorage.setItem('InfoWCEDoc',token);
           this.router.navigate(['/user/dashboard']);
+          localStorage.setItem("WCEDOCReload","yes");
         }
         else {
           this.isLoginFailed = true;

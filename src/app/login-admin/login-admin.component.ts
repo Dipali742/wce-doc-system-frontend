@@ -64,6 +64,7 @@ export class LoginAdminComponent implements OnInit {
           localStorage.clear();
           localStorage.setItem('InfoWCEDoc',token);
           this.router.navigate(['/admin/dashboard']);
+          localStorage.setItem("WCEDOCReload","yes");
         }
         else {
           this.isLoginFailed = true;
@@ -80,7 +81,7 @@ export class LoginAdminComponent implements OnInit {
     );
   }
   getUrl(): string {
-    return (this.backend_url+'/users/check/'
+    return (this.backend_url+'/users/checkAdmin/'
     +this.loginForm.value.username+'/'+this.loginForm.value.password);
   }
   reload() {

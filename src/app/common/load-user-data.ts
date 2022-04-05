@@ -88,7 +88,7 @@ export class LoadUserDataComponent {
       }
 
       getUrlAdmin(): string {
-        return (this.backend_url+'/users/check/'
+        return (this.backend_url+'/users/checkAdmin/'
         +this.username+'/'+this.password);
       }
 } 

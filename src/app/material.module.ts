@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {Bre} from '@angular/cdk/layout';
 
 @NgModule({
@@ -22,6 +23,7 @@ imports: [
     MatInputModule,
     MatSidenavModule,
     MatDividerModule,
+    MatProgressSpinnerModule
     // BreakpointObserverModule
 ],
 exports: [
@@ -34,6 +36,7 @@ exports: [
     MatInputModule,
     MatSidenavModule,
     MatDividerModule,
+    MatProgressSpinnerModule
     // BreakpointObserver
 ],
  
