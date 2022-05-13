@@ -21,7 +21,10 @@ import {HomeComponent} from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import {UHelpComponent} from './user-area/u-help/u-help.component';
+import { AHelpComponent } from './admin-area/a-help/a-help.component';
+import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.component';
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,10 @@ import { HttpClientModule } from '@angular/common/http';
     AProfileComponent,
     ADocumentTypesComponent,
     HomeComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    UHelpComponent,
+    AHelpComponent,
+    UMyRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]

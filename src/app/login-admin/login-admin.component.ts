@@ -20,7 +20,7 @@ export class LoginAdminComponent implements OnInit {
   errorMessage = '';
   isLoginFailed = false;
   backend_url='';
-  userData: any;
+  adminData: any;
 
   constructor(private app:AppComponent,
     private route: ActivatedRoute,
@@ -45,7 +45,7 @@ export class LoginAdminComponent implements OnInit {
     if(localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
       if(this.sharedvar.isLoggedIn && this.sharedvar.isAdmin) {
-        this.router.navigate(['/admin-dashboard']);
+        this.router.navigate(['/admin/dashboard']);
       }
     }
   }
@@ -58,18 +58,19 @@ export class LoginAdminComponent implements OnInit {
         if(data) {
           this.isLoginFailed = false;
           this.sharedvar.isLoggedIn = true;
-          this.sharedvar.userInfo = data;
-          
-          let token = "1 "+this.userData.username+" "+this.userData.password;
+          this.sharedvar.adminInfo = data;
+          this.adminData = data;
+          let token = "1 "+this.adminData.username+" "+this.adminData.password;
           localStorage.clear();
           localStorage.setItem('InfoWCEDoc',token);
-          this.router.navigate(['/admin-dashboard']);
+          this.router.navigate(['/admin/dashboard']);
+          localStorage.setItem("WCEDOCReload","yes");
         }
         else {
           this.isLoginFailed = true;
           this.errorMessage = 'Invalid username/password';
           this.sharedvar.isLoggedIn = false;
-          // this.router.navigate(['/user-dashboard']);
+          // this.router.navigate(['/user/dashboard']);
         }
         console.log(data);
       },

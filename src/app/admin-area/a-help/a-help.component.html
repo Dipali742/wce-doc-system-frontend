@@ -9,5 +9,8 @@
     </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-   Admin dashboard - Under progress
+    <mat-card>
+        logged in as admin : {{sharedvar.isAdmin}}
+        <mat-card>Sorry! we cant help you</mat-card>
+    </mat-card>
 </div>

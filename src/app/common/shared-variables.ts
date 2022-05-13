@@ -8,4 +8,5 @@ export class SharedVariablesComponent {
     adminInfo = null;
     userInfo = null;
     isAdmin : any;
+    backend_url='https://wce-tracker-api.herokuapp.com'
 } 
