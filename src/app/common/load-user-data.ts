@@ -83,7 +83,7 @@ export class LoadUserDataComponent {
       }
 
       getUrlUser(): string {
-        return (this.backend_url+'/users/check/'
+        return (this.backend_url+'/users/checkStudent/'
         +this.username+'/'+this.password);
       }
 

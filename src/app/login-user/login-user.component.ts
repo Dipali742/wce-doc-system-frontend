@@ -81,7 +81,7 @@ export class LoginUserComponent implements OnInit {
     );
   }
   getUrl(): string {
-    return (this.backend_url+'/users/check/'
+    return (this.sharedvar.backend_url+'/users/checkStudent/'
     +this.loginForm.value.username+'/'+this.loginForm.value.password);
   }
   reload() {

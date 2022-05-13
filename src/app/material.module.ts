@@ -11,7 +11,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {Bre} from '@angular/cdk/layout';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
 imports: [
     MatButtonModule,
@@ -23,8 +24,11 @@ imports: [
     MatInputModule,
     MatSidenavModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSelectModule
     // BreakpointObserverModule
+
 ],
 exports: [
     MatButtonModule,
@@ -36,7 +40,9 @@ exports: [
     MatInputModule,
     MatSidenavModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSelectModule
     // BreakpointObserver
 ],
  

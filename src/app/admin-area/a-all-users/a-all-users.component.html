@@ -10,6 +10,95 @@
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
     <mat-card>
-        logged in as admin : {{sharedvar.isAdmin}}
+        <!-- logged in as admin : {{sharedvar.isAdmin}} -->
+        <mat-tab-group (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="All Students">
+                
+                <ag-grid-angular
+                style=" height:500px;"
+                class="ag-theme-alpine"
+                [rowData]="studentDataGridData"
+                [columnDefs]="studentDataGridColumns"
+                rowSelection="multiple"
+                sideBar="{toolPanels: ['columns','filters']}"
+                [pagination]="true"
+                [paginationPageSize]="10"
+        >
+        </ag-grid-angular>
+            </mat-tab>
+            <mat-tab label="Add Student">
+                <form [formGroup]="addStudentForm">
+                    <div  class="ng-grid">
+                        <div >
+                            <mat-form-field class="col-4" >
+                                <mat-label>PRN</mat-label>
+                                <input formControlName="prn" matInput type="text"  required  placeholder="2018BTECS00029" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>First Name</mat-label>
+                                <input formControlName="fname" matInput type="text"  required  placeholder="Test" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>Last Name</mat-label>
+                                <input formControlName="lname" matInput type="text"  required  placeholder="test" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>E-Mail</mat-label>
+                                <input formControlName="email" matInput type="text"  required  placeholder="abc@gmail.com" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>Phone Number</mat-label>
+                                <input formControlName="phone" matInput type="text"  required  placeholder="1234" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>Course</mat-label>
+                                <mat-select required formControlName="course">
+                                    <mat-option *ngFor="let course of coursesVar" [value]="course">
+                                        {{course}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>Branch</mat-label>
+                                <input formControlName="branch" matInput type="text"  required  placeholder="CSE" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div >
+                            <mat-form-field >
+                                <mat-label>PRN</mat-label>
+                                <input formControlName="year" matInput type="text"  required  placeholder="4" >
+                                <mat-error >This field is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="primary" (click)="Onsubmit()">
+                        Add Student   
+                   </button> 
+                   <button mat-raised-button color="primary" (click)="Onreset()">
+                    Reset   
+               </button>  
+                </form>
+            </mat-tab>
+        </mat-tab-group>
+        
     </mat-card>
 </div>

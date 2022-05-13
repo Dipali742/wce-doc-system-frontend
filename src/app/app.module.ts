@@ -24,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {UHelpComponent} from './user-area/u-help/u-help.component';
 import { AHelpComponent } from './admin-area/a-help/a-help.component';
 import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.component';
-
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +53,8 @@ import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.compo
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]
