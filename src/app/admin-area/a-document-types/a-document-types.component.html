@@ -9,7 +9,66 @@
     </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
+    
     <mat-card>
-        logged in as admin : {{sharedvar.isAdmin}}
+        <!-- logged in as admin : {{sharedvar.isAdmin}} -->
+        <mat-tab-group (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="Available Document Types">
+                
+                <ag-grid-angular
+                style=" height:500px;"
+                class="ag-theme-alpine"
+                [rowData]="documentTypesGridData"
+                [columnDefs]="documentTypesGridColumns"
+                rowSelection="multiple"
+                sideBar="{toolPanels: ['columns','filters']}"
+                [pagination]="true"
+                [paginationPageSize]="10"
+        >
+        </ag-grid-angular>
+            </mat-tab>
+            <mat-tab label="Add Document Type">
+                <form [formGroup]="addDocTypeForm">
+                    <div >
+                        <mat-form-field >
+                            <mat-label>Document Name</mat-label>
+                            <input formControlName="name" matInput type="text"  required  placeholder="1234" >
+                            <mat-error >This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div >
+                        <mat-form-field >
+                            <mat-label>Approval from</mat-label>
+                            <mat-select required formControlName="ApprovalFrom">
+                                <mat-option *ngFor="let af of ApprovalFromVar" [value]="af">
+                                    {{af}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>This field is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                          <mat-form-field class="example-chip-list">
+                            <mat-chip-list #chipList>
+                             
+                              <input placeholder="New document type"
+                                     [matChipInputFor]="chipList"
+                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                     [matChipInputAddOnBlur]="addOnBlur"
+                                     (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            
+                          </mat-form-field>
+                          <mat-chip *ngFor="let fruit of documentTypes" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(fruit)">
+                     {{fruit.name}}
+                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                   </mat-chip>
+                    </div>
+                </form>
+
+                <button mat-raised-button color="primary">Create new document type</button>
+            </mat-tab>
+        </mat-tab-group>
     </mat-card>
 </div>

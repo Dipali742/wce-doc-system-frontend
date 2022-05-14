@@ -13,6 +13,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {Bre} from '@angular/cdk/layout';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
+import {MatChipsModule} from '@angular/material/chips';
 @NgModule({
 imports: [
     MatButtonModule,
@@ -26,7 +28,9 @@ imports: [
     MatDividerModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatChipsModule
     // BreakpointObserverModule
 
 ],
@@ -42,10 +46,13 @@ exports: [
     MatDividerModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatSelectModule
+    
+    MatSelectModule,
+    MatDialogModule,
+    MatChipsModule
     // BreakpointObserver
 ],
- 
+entryComponents:[MatDialogModule]
 })
  
 export  class  MyMaterialModule { }

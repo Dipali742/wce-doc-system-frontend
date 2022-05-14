@@ -100,16 +100,16 @@ export class AAllUsersComponent implements OnInit {
   Onsubmit() {
     console.log("FormData : ",this.addStudentForm.value);
     const studentData = {
-      "prn" : "2018BTECS00061",
+      "prn" : "2018BTECS0001",
       "fname" : "Nishi",
       "lname" : "Bhate",
       "email" : "nishibhate1@gmail.com",
-      "phone" : "12345",
+      "phone" : "1234567891",
       "course" : "UG",
       "branch" : "CSE",
       "year" : 4,
       "password" : "12345",
-      "username" : "2018BTECS00061",
+      "username" : "2018BTECS0001",
       "role" : "student",
       "documents":[],
       "documents_issued":0

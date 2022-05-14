@@ -1,6 +1,7 @@
 {
-  "assets": ["src/_redirects"]
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "c54b7d1e-142e-47ef-9bef-ece337e6f15b"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
