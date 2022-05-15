@@ -12,8 +12,8 @@ export const DOCUMENT_TYPE_GRID_COLUMNS = [
         filter: true
     },
     {
-        headerName: "Document Name",
-        field: "name",
+        headerName: "Required documents",
+        field: "requiredDoc",
         sortable: true,
         filter: true
     }

@@ -38,8 +38,8 @@ export class ADocumentTypesComponent implements OnInit {
     this.loadAllDocumentTypes();
     this.addDocTypeForm = this.fb.group({
       name : new FormControl('', [Validators.required]),
-      ApprovalFrom : new FormControl('', [Validators.required]),
-      RequiredDocuments : new FormControl(''),
+      sendTo : new FormControl('', [Validators.required]),
+      requiredDoc : new FormControl(''),
     })
   
   }
@@ -101,11 +101,28 @@ export class ADocumentTypesComponent implements OnInit {
     }
   }
 
-  remove(fruit: any): void {
-    const index = this.documentTypes.indexOf(fruit);
+  remove(docType: any): void {
+    const index = this.documentTypes.indexOf(docType);
 
     if (index >= 0) {
       this.documentTypes.splice(index, 1);
     }
+  }
+
+  onSubmit() {
+    this.addDocTypeForm.value.requiredDoc = this.documentTypes;
+    console.log(this.addDocTypeForm.value)
+    this.userService.addDocumentTypes(this.getUrl(), this.addDocTypeForm.value).subscribe(
+      data => {
+        if(data) {
+          
+        }
+        else {
+        }
+        console.log(data);
+      },
+      err => {
+      }
+    );
   }
 }

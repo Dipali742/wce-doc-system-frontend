@@ -28,4 +28,8 @@ export class UserService {
   addStudent(url:string,studentData: any) : Observable<object> {
     return this.http.post(url, studentData);
   }
+
+  addDocumentTypes(url:string,docTypeData: any) : Observable<object> {
+    return this.http.post(url, docTypeData);
+  }
 }

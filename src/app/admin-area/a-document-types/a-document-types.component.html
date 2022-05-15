@@ -9,7 +9,7 @@
     </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-    
+
     <mat-card>
         <!-- logged in as admin : {{sharedvar.isAdmin}} -->
         <mat-tab-group (selectedTabChange)="onTabChange($event)">
@@ -39,7 +39,7 @@
                     <div >
                         <mat-form-field >
                             <mat-label>Approval from</mat-label>
-                            <mat-select required formControlName="ApprovalFrom">
+                            <mat-select required formControlName="sendTo">
                                 <mat-option *ngFor="let af of ApprovalFromVar" [value]="af">
                                     {{af}}
                                 </mat-option>
@@ -51,7 +51,7 @@
                           <mat-form-field class="example-chip-list">
                             <mat-chip-list #chipList>
                              
-                              <input placeholder="New document type"
+                              <input placeholder="Required documents"
                                      [matChipInputFor]="chipList"
                                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                      [matChipInputAddOnBlur]="addOnBlur"
@@ -59,15 +59,15 @@
                             </mat-chip-list>
                             
                           </mat-form-field>
-                          <mat-chip *ngFor="let fruit of documentTypes" [selectable]="selectable"
-                            [removable]="removable" (removed)="remove(fruit)">
-                     {{fruit.name}}
+                          <mat-chip *ngFor="let docType of documentTypes" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(docType)">
+                     {{docType.name}}
                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                    </mat-chip>
                     </div>
                 </form>
 
-                <button mat-raised-button color="primary">Create new document type</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()">Create new document type</button>
             </mat-tab>
         </mat-tab-group>
     </mat-card>
