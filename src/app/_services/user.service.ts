@@ -32,4 +32,13 @@ export class UserService {
   addDocumentTypes(url:string,docTypeData: any) : Observable<object> {
     return this.http.post(url, docTypeData);
   }
+
+  deleteDocumentType(url:string) : Observable<object> {
+    return this.http.delete(url);
+  }
+
+  updateDocumentType(url:string, docTypeData: any) : Observable<object> {
+    return this.http.patch(url, docTypeData);
+  }
+
 }

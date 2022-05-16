@@ -1,0 +1,75 @@
+<mat-dialog-content>
+    <div *ngIf="actionType === 'edit_action'">
+        <h1> Edit document type
+            <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right;">
+                <mat-icon matSuffix>close</mat-icon>
+            </button>
+        </h1>
+
+
+        <form [formGroup]="documentTypeForm">
+
+            <div>
+                <mat-form-field>
+                    <mat-label>Document type</mat-label>
+                    <textarea matIinput formControlName="name" matInput type="text" required
+                        [(ngModel)]="dialogData.name">
+                </textarea>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Approval from</mat-label>
+                    <textarea matIinput formControlName="sendTo" matInput type="text" required
+                        [(ngModel)]="dialogData.sendTo">
+                </textarea>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-chip-list">
+                    <mat-chip-list #chipList>
+
+                        <input placeholder="Required documents" [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+
+                </mat-form-field>
+                <mat-chip *ngFor="let docType of dialogData.requiredDoc" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(docType)">
+                    {{docType}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+            </div>
+
+        </form>
+
+    </div>
+    <div *ngIf="actionType === 'delete_action'">
+        <h1>
+            <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right;">
+                <mat-icon matSuffix>close</mat-icon>
+            </button>
+        </h1>
+
+        <h1>Are you sure you want to delete document type "{{dialogData.name}}"</h1>
+        <br>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
+    <button *ngIf="actionType === 'edit_action'" mat-raised-button color="primary" (click)="OnEdit()"
+        style="float: right;">
+        Edit
+    </button>
+    <button *ngIf="actionType === 'delete_action'" mat-raised-button color="primary" (click)="OnDelete()"
+        style="float: right;">
+        Delete
+    </button>
+    <button mat-raised-button color="primary" (click)="Onsubmit()" style="float: right;">
+        Cancel
+    </button>
+</mat-dialog-actions>

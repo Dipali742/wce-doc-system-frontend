@@ -27,6 +27,7 @@ import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.compo
 import { AgGridModule } from 'ag-grid-angular';
 import { AActionComponent } from './admin-area/a-request/a-actions/a-actions.component';
 import { AViewRequestComponent } from './admin-area/a-request/a-view-request/a-view-request.component';
+import { ADocumentActionComponent } from './admin-area/a-document-types/a-document-action/a-document-action.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { AViewRequestComponent } from './admin-area/a-request/a-view-request/a-v
     AHelpComponent,
     UMyRequestComponent,
     AActionComponent,
-    AViewRequestComponent
+    AViewRequestComponent,
+    ADocumentActionComponent
   ],
   imports: [
     BrowserModule,
