@@ -10,6 +10,22 @@
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
     <mat-card>
-        logged in as user : {{sharedvar.isAdmin}}
+        <!-- logged in as user : {{sharedvar.isAdmin}} -->
+        <mat-tab-group>
+            <mat-tab label="My Requests">
+                <ag-grid-angular
+                style=" height:500px;"
+                class="ag-theme-alpine"
+                [rowData]="myRequestGridData"
+                [columnDefs]="myRequestColumns"
+                rowSelection="multiple"
+                sideBar="{toolPanels: ['columns','filters']}"
+                [pagination]="true"
+                [paginationPageSize]="10"
+                (cellClicked)="clickedOnActions($event.type,$event.column,$event.data,$event)"
+        >
+        </ag-grid-angular>
+            </mat-tab>
+        </mat-tab-group>
     </mat-card>
 </div>
