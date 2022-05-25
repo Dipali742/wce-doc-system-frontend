@@ -8,6 +8,7 @@ import { STUDENT_GRID_COLUMNS } from '../grid-columns/student-data-grid-columns'
 import { STUDENT_REQUEST_GRID_COLUMNS } from '../grid-columns/student-request-grid-columns';
 import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AActionComponent } from './a-actions/a-actions.component';
+import { AViewRequestComponent } from './a-view-request/a-view-request.component';
 
 @Component({
   selector: 'app-a-request',
@@ -46,6 +47,7 @@ export class ARequestComponent implements OnInit {
   }
 
   openDialog(actionType: string,data: any) {
+    // view_action
     const dialogConfig = new MatDialogConfig();
     if(actionType === "decline_action" || actionType === "approve_action") {
       const modalRef = this.matDialog.open(AActionComponent, {
@@ -56,7 +58,15 @@ export class ARequestComponent implements OnInit {
         ...this.defaultDialogConfig
       });
     }
-  
+    else {
+      const modalRef = this.matDialog.open(AViewRequestComponent, {
+        data : {
+          ComponentData : data,
+          action : actionType
+        },
+        ...this.defaultDialogConfig
+      });
+    }
   }
 
   loadStudentRequests() {
@@ -88,18 +98,22 @@ export class ARequestComponent implements OnInit {
         console.log("hi");
         this.openDialog("decline_action",data);
       }
-      if(event.event.target.getAttribute("id") === "approve_action") {
+      else if(event.event.target.getAttribute("id") === "approve_action") {
         console.log("approve");
         this.openDialog("approve_action",data);
       }
     }
-    // if(type === 'cellClicked' && column.colId === "files") {
+    if(type === 'cellClicked' && column.colId === "files") {
     //   console.log(event);
     //   if(event.event.target.getAttribute("id") === "view_attachments") {
     //     console.log("hi");
     //   }
+    if(event.event.target.getAttribute("id") === "view_action") {
+      console.log("view");
+      this.openDialog("view_action",data);
+    }
       
-    // }
+    }
   }
   
   reload() {
