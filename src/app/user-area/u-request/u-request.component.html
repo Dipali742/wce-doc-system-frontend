@@ -10,6 +10,16 @@
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
     <mat-card>
-        logged in as user : {{sharedvar.isAdmin}}
+        <!-- logged in as user : {{sharedvar.isAdmin}} -->
+        <mat-tab-group>
+        <mat-tab label="Add Document Type">
+            <form >
+               
+            </form>
+
+            <div class="button-row">
+            </div>
+        </mat-tab>
+    </mat-tab-group>
     </mat-card>
 </div>
