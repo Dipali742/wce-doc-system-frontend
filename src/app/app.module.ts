@@ -29,6 +29,7 @@ import { AActionComponent } from './admin-area/a-request/a-actions/a-actions.com
 import { AViewRequestComponent } from './admin-area/a-request/a-view-request/a-view-request.component';
 import { ADocumentActionComponent } from './admin-area/a-document-types/a-document-action/a-document-action.component';
 import { UViewRequestComponent } from './user-area/u-myRequests/view-action/u-view-request-action.component';
+import { ARequestActionComponent } from './user-area/u-request/a-request-action/a-request-action.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UViewRequestComponent } from './user-area/u-myRequests/view-action/u-vi
     AActionComponent,
     AViewRequestComponent,
     ADocumentActionComponent,
-    UViewRequestComponent
+    UViewRequestComponent,
+    ARequestActionComponent
   ],
   imports: [
     BrowserModule,

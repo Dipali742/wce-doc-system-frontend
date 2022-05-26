@@ -33,6 +33,10 @@ export class UserService {
     return this.http.post(url, docTypeData);
   }
 
+  addRequest(url:string,requestData: any) : Observable<object> {
+    return this.http.post(url, requestData);
+  }
+
   deleteDocumentType(url:string) : Observable<object> {
     return this.http.delete(url);
   }

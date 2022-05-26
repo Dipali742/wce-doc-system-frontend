@@ -10,16 +10,17 @@
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
     <mat-card>
-        <!-- logged in as user : {{sharedvar.isAdmin}} -->
         <mat-tab-group>
-        <mat-tab label="Add Document Type">
-            <form >
-               
-            </form>
-
-            <div class="button-row">
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+            <mat-tab label="Create New Request">
+                <mat-card >
+                    
+                <ag-grid-angular style=" height:500px; " class="ag-theme-alpine" [rowData]="documentTypesGridData"
+                [columnDefs]="documentTypesGridColumns" rowSelection="multiple"
+                sideBar="{toolPanels: ['columns','filters']}" [pagination]="true" [paginationPageSize]="10"
+                (cellClicked)="clickedOnActions($event.type,$event.column,$event.data,$event)">
+            </ag-grid-angular>
+                </mat-card>
+            </mat-tab>
+        </mat-tab-group>
     </mat-card>
 </div>

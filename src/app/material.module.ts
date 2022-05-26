@@ -15,6 +15,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 @NgModule({
 imports: [
     MatButtonModule,
@@ -30,7 +32,8 @@ imports: [
     MatTabsModule,
     MatSelectModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule
     // BreakpointObserverModule
 
 ],
@@ -49,7 +52,8 @@ exports: [
     
     MatSelectModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule
     // BreakpointObserver
 ],
 entryComponents:[MatDialogModule]
