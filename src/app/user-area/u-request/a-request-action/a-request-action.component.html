@@ -1,64 +1,108 @@
 <mat-dialog-content>
-    <h1> Request Document
-        <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right;">
-            <mat-icon matSuffix>close</mat-icon>
-        </button>
-    </h1>
-    <mat-card>
-        <form [formGroup]="createRequestForm">
-            <div>
-                <mat-form-field>
-                    <mat-label>PRN</mat-label>
-                    <input [readOnly]="true" matIinput formControlName="prn" matInput type="text" required
-                        [(ngModel)]="userInfo.prn">
-             
-                    <mat-error>This field is required</mat-error>
-                </mat-form-field>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <mat-form-field>
-                    <mat-label>Document Type</mat-label>
-                    <input matIinput formControlName="documentType" matInput type="text" required
-                        [(ngModel)]="docType.name" [readOnly]="true">
-             
-                    <mat-error>This field is required</mat-error>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Approval from</mat-label>
-                    <input matIinput formControlName="approvalFrom" matInput type="text" required
-                        [(ngModel)]="docType.sendTo" [readOnly]="true">
-             
-                    <mat-error>This field is required</mat-error>
-                </mat-form-field>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <mat-form-field>
-                <mat-label>Comments</mat-label>
-                <textarea matIinput formControlName="comment" matInput type="text" required
-                   ></textarea>
-         
-                <mat-error>This field is required</mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <!-- <mat-form-field >
+  <h1>
+    Request Document
+    <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right">
+      <mat-icon matSuffix>close</mat-icon>
+    </button>
+  </h1>
+  <mat-card>
+    <form [formGroup]="createRequestForm">
+      <div>
+        <mat-form-field>
+          <mat-label>PRN</mat-label>
+          <input
+            [readOnly]="true"
+            matIinput
+            formControlName="prn"
+            matInput
+            type="text"
+            required
+            [(ngModel)]="userInfo.prn"
+          />
+
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+          <mat-label>Document Type</mat-label>
+          <input
+            matIinput
+            formControlName="documentType"
+            matInput
+            type="text"
+            required
+            [(ngModel)]="docType.name"
+            [readOnly]="true"
+          />
+
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Approval from</mat-label>
+          <input
+            matIinput
+            formControlName="approvalFrom"
+            matInput
+            type="text"
+            required
+            [(ngModel)]="docType.sendTo"
+            [readOnly]="true"
+          />
+
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+          <mat-label>Comments</mat-label>
+          <textarea
+            matIinput
+            formControlName="comments"
+            matInput
+            type="text"
+            required
+          ></textarea>
+
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <!-- <mat-form-field >
                 <mat-label>Upload document</mat-label> -->
-                <label>Fee Receipt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input formControlName="file" type="file"  required  placeholder="file" (change)="onChange($event)" required>
-                <!-- <mat-error >This field is required</mat-error> -->
-            <!-- </mat-form-field> -->
-        </div>
-        </form>
-    </mat-card>
+        <label>Fee Receipt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input
+          formControlName="file"
+          type="file"
+          required
+          placeholder="file"
+          (change)="onChange($event)"
+          required
+          multiple
+        />
+        <!-- <mat-error >This field is required</mat-error> -->
+        <!-- </mat-form-field> -->
+      </div>
+    </form>
+  </mat-card>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
-    <button mat-raised-button color="primary" (click)="OnEdit()"
-        style="float: right;">
-        Submit Request
-    </button>
-    <button mat-raised-button color="primary" (click)="OnCancel()" style="float: right;">
-        Cancel
-    </button>
+  <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="OnEdit()"
+    style="float: right"
+  >
+    Submit Request
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="OnCancel()"
+    style="float: right"
+  >
+    Cancel
+  </button>
 </mat-dialog-actions>
