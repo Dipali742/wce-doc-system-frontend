@@ -1,24 +1,25 @@
-import { NgModule } from  '@angular/core';
- 
-import {MatButtonModule} from  '@angular/material/button';
-import {MatToolbarModule} from  '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule } from '@angular/material/card';
+import { NgModule } from '@angular/core';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import {Bre} from '@angular/cdk/layout';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatSelectModule} from '@angular/material/select';
-import { MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
-imports: [
+  imports: [
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -33,11 +34,11 @@ imports: [
     MatSelectModule,
     MatDialogModule,
     MatChipsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatRadioModule,
     // BreakpointObserverModule
-
-],
-exports: [
+  ],
+  exports: [
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -49,14 +50,14 @@ exports: [
     MatDividerModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    
+
     MatSelectModule,
     MatDialogModule,
     MatChipsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatRadioModule,
     // BreakpointObserver
-],
-entryComponents:[MatDialogModule]
+  ],
+  entryComponents: [MatDialogModule],
 })
- 
-export  class  MyMaterialModule { }
+export class MyMaterialModule {}

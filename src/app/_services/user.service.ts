@@ -3,15 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getStudentData(url: string): Observable<any> {
     return this.http.get(url, httpOptions);
@@ -25,24 +24,37 @@ export class UserService {
     return this.http.get(url, httpOptions);
   }
 
-  addStudent(url:string,studentData: any) : Observable<object> {
+  addStudent(url: string, studentData: any): Observable<object> {
     return this.http.post(url, studentData);
   }
 
-  addDocumentTypes(url:string,docTypeData: any) : Observable<object> {
+  addDocumentTypes(url: string, docTypeData: any): Observable<object> {
     return this.http.post(url, docTypeData);
   }
 
-  addRequest(url:string,requestData: any) : Observable<object> {
+  addRequest(url: string, requestData: any): Observable<object> {
     return this.http.post(url, requestData);
   }
 
-  deleteDocumentType(url:string) : Observable<object> {
+  deleteDocumentType(url: string): Observable<object> {
     return this.http.delete(url);
   }
 
-  updateDocumentType(url:string, docTypeData: any) : Observable<object> {
+  updateDocumentType(url: string, docTypeData: any): Observable<object> {
     return this.http.patch(url, docTypeData);
   }
 
+  declineRequest(url: string, requestData: any): Observable<object> {
+    return this.http.patch(url, requestData);
+  }
+
+  approveRequest(url: string, requestData: any): Observable<object> {
+    return this.http.patch(url, requestData);
+  }
+
+  download(url: string): Observable<Blob> {
+    return this.http.get(url, {
+      responseType: 'blob',
+    });
+  }
 }

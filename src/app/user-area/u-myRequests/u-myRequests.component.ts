@@ -11,99 +11,91 @@ import { UViewRequestComponent } from './view-action/u-view-request-action.compo
 @Component({
   selector: 'app-u-myRequests',
   templateUrl: './u-myRequests.component.html',
-  styleUrls: ['./u-myRequests.component.css']
+  styleUrls: ['./u-myRequests.component.css'],
 })
 export class UMyRequestComponent implements OnInit {
-
- 
   myRequestColumns: Array<any> = [...MY_REQUEST_GRID_COLUMNS];
-  myRequestGridData: any
+  myRequestGridData: any;
   userInfo: any;
-  constructor( private router: Router,
+  constructor(
+    private router: Router,
     private bkd: BackendUrlComponent,
-    public sharedvar:SharedVariablesComponent,
+    public sharedvar: SharedVariablesComponent,
     private load_data: LoadUserDataComponent,
     private userService: UserService,
-    private matDialog: MatDialog) {
-   
-   }
+    private matDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     // this.reload();
-    if(localStorage['InfoWCEDoc']) {
+    if (localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
       this.userInfo = this.sharedvar.userInfo;
-      console.log("nishi data",this.userInfo);
+
       this.loadMyRequests();
     }
-
-    
   }
 
   loadMyRequests() {
     this.userService.getDocumentTypes(this.getUrl()).subscribe(
-      data => {
+      (data) => {
         if (data) {
-          data.filter((a: { user: { prn: any; }; }) => a.user.prn == this.userInfo.prn)
-          this.myRequestGridData = data;
-          console.log("Hi doc types", this.myRequestGridData);
+          console.log('nishi data', this.userInfo);
+          console.log('Hi sailee ', data);
+          this.myRequestGridData = data.filter(
+            (a: { user: { prn: any } }) => a.user.prn === this.userInfo.prn
+          );
+        } else {
         }
-        else {
 
-        }
         // console.log(data);
       },
-      err => {
-
-      }
+      (err) => {}
     );
   }
 
-
   getUrl(): string {
-    return (this.sharedvar.backend_url + '/requests');
+    return this.sharedvar.backend_url + '/requests';
   }
   reload() {
     window.location.reload();
   }
 
   defaultDialogConfig = {
-    width : "50vw",
-    minWidth : "50vw",
-    maxWidth : "50vw",
-    minHeight : "45vh",
-    maxHeight : "75vh"
-  }
-  openDialog(actionType: string,data: any) {
+    width: '50vw',
+    minWidth: '50vw',
+    maxWidth: '50vw',
+    minHeight: '45vh',
+    maxHeight: '75vh',
+  };
+  openDialog(actionType: string, data: any) {
     const dialogConfig = new MatDialogConfig();
-    if(actionType === "view_attachments") {
-      console.log("nishi ")
+    if (actionType === 'view_attachments') {
+      console.log('nishi ');
       const modalRef = this.matDialog.open(UViewRequestComponent, {
-        data : {
-          ComponentData : data,
-          action : actionType
+        data: {
+          ComponentData: data,
+          action: actionType,
         },
-        ...this.defaultDialogConfig
+        ...this.defaultDialogConfig,
       });
     }
-  
   }
-  
-  clickedOnActions(type: any,column:any,data:any,event:any) : void {
-    console.log("nishi",event);
-    if(type === 'cellClicked' && column.colId === "files") {
-      console.log("nishi",event);
-      if(event.event.target.getAttribute("id") === "view_attachments") {
-        console.log("hi");
-        this.openDialog("view_attachments",data);
+
+  clickedOnActions(type: any, column: any, data: any, event: any): void {
+    console.log('nishi', event);
+    if (type === 'cellClicked' && column.colId === 'files') {
+      console.log('nishi', event);
+      if (event.event.target.getAttribute('id') === 'view_attachments') {
+        console.log('hi');
+        this.openDialog('view_attachments', data);
       }
     }
     // if(type === 'cellClicked' && column.colId === "admin_files") {
     //   console.log("nishi",event);
     //   if(event.event.target.getAttribute("id") === "file_download") {
     //     console.log("file download");
-        
-        
+
     //   }
     // }
     // if(type === 'cellClicked' && column.colId === "files") {
@@ -111,7 +103,7 @@ export class UMyRequestComponent implements OnInit {
     //   if(event.event.target.getAttribute("id") === "view_attachments") {
     //     console.log("hi");
     //   }
-      
+
     // }
   }
 }

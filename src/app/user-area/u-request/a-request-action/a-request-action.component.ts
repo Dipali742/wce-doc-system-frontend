@@ -34,6 +34,7 @@ export class ARequestActionComponent {
   userInfo: any;
   docType: any;
   files: Array<File> = [];
+  addComment: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -49,7 +50,15 @@ export class ARequestActionComponent {
     this.userInfo = this.dialogData.userInfo;
     this.docType = this.dialogData.data;
     this.createRequestForm = FormGroup;
+    this.addComment = FormGroup;
     console.log("I'm dialog data : ", this.docType);
+  }
+
+  ngOnInit() {
+    this.addComment = this.fb.group({
+      comment: new FormControl('', [Validators.required]),
+    });
+
     this.createRequestForm = this.fb.group({
       prn: new FormControl('', [Validators.required]),
       documentType: new FormControl('', [Validators.required]),
@@ -58,19 +67,8 @@ export class ARequestActionComponent {
       file: new FormControl('', [Validators.required]),
     });
   }
-
-  ngOnInit() {
-    
-  }
   onChange(event: any) {
     this.files = <Array<File>>event.target.files;
-    // this.file = event.target.files[0];
-  }
-
-  comments:any;
-  onChangeComment(event: any) {
-    console.log("Event : ", event.target.comments)
-    this.comments = event.target.comments;
     // this.file = event.target.files[0];
   }
 
@@ -89,8 +87,8 @@ export class ARequestActionComponent {
     formData.append('user', this.userInfo._id);
     formData.append('document_type', this.docType._id);
     formData.append('requiredValidations', 'scholarship');
-    formData.append('comments', this.comments);
-    console.log(this.createRequestForm.comments);
+    formData.append('comments', this.addComment.value.comment);
+    console.log(this.addComment.value.comment);
 
     this.userService.addRequest(this.getUrl(), formData).subscribe(
       (data: any) => {
