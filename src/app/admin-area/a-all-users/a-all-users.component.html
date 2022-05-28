@@ -78,15 +78,23 @@
                         <div >
                             <mat-form-field >
                                 <mat-label>Branch</mat-label>
-                                <input formControlName="branch" matInput type="text"  required  placeholder="CSE" >
+                                <mat-select required formControlName="branch">
+                                    <mat-option *ngFor="let branch of branchVar" [value]="branch">
+                                        {{branch}}
+                                    </mat-option>
+                                </mat-select>
                                 <mat-error >This field is required</mat-error>
                             </mat-form-field>
                         </div>
                         <div >
                             <mat-form-field >
-                                <mat-label>PRN</mat-label>
-                                <input formControlName="year" matInput type="text"  required  placeholder="4" >
-                                <mat-error >This field is required</mat-error>
+                                <mat-label>Year</mat-label>
+                                <mat-select required formControlName="year">
+                                    <mat-option *ngFor="let year of yearVar" [value]="year">
+                                        {{year}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>This field is required</mat-error>
                             </mat-form-field>
                         </div>
                     </div>

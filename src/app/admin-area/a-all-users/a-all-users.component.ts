@@ -65,9 +65,9 @@ export class AAllUsersComponent implements OnInit {
   }
 
   onTabChange(event: { index: number; }) {
-    if(event.index ===1) {
+    //if(event.index ===1) {
       this.loadStudentData();
-   }  
+   //}  
   }
 
   loadStudentData() {
@@ -100,16 +100,16 @@ export class AAllUsersComponent implements OnInit {
   Onsubmit() {
     console.log("FormData : ",this.addStudentForm.value);
     const studentData = {
-      "prn" : "2018BTECS0001",
-      "fname" : "Nishi",
-      "lname" : "Bhate",
-      "email" : "nishibhate1@gmail.com",
-      "phone" : "1234567891",
-      "course" : "UG",
-      "branch" : "CSE",
-      "year" : 4,
+      "prn" : this.addStudentForm.value.prn,
+      "fname" : this.addStudentForm.value.fname,
+      "lname" :this.addStudentForm.value.lname,
+      "email" : this.addStudentForm.value.email,
+      "phone" : this.addStudentForm.value.phone,
+      "course" : this.addStudentForm.value.course,
+      "branch" : this.addStudentForm.value.branch,
+      "year" : this.addStudentForm.value.year,
       "password" : "12345",
-      "username" : "2018BTECS0001",
+      "username" : this.addStudentForm.value.prn,
       "role" : "student",
       "documents":[],
       "documents_issued":0

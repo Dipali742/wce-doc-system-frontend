@@ -18,8 +18,14 @@ export const MY_REQUEST_GRID_COLUMNS = [
         filter: true
     },
     {
-        headerName: "Comments",
+        headerName: "My Comments",
         field: "comments",
+        sortable: true,
+        filter: true
+    },
+    {
+        headerName: "Admin Comments",
+        field: "admin_comments",
         sortable: true,
         filter: true
     },
@@ -39,6 +45,22 @@ export const MY_REQUEST_GRID_COLUMNS = [
                 return "<a id='view_attachments'>View</a>"
             }
             return "";       
+        },
+        sortable: true,
+        filter: true
+    },
+    {
+        headerName: "Document",
+        field: "admin_files",
+        cellRenderer: (params: any) => {
+            if(params.data) {
+                //if(params.data.admin_files.length !=0 )
+                console.log(params.data.admin_files[0]);
+                    return "<a></a>"
+                //return "<p>Unavailable</p>"
+            }
+            // return "";  
+            return "<mat-icon id='file_download' aria-hidden='false'>file_download</mat-icon>"     
         },
         sortable: true,
         filter: true

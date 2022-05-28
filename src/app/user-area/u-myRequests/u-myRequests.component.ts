@@ -98,6 +98,14 @@ export class UMyRequestComponent implements OnInit {
         this.openDialog("view_attachments",data);
       }
     }
+    // if(type === 'cellClicked' && column.colId === "admin_files") {
+    //   console.log("nishi",event);
+    //   if(event.event.target.getAttribute("id") === "file_download") {
+    //     console.log("file download");
+        
+        
+    //   }
+    // }
     // if(type === 'cellClicked' && column.colId === "files") {
     //   console.log(event);
     //   if(event.event.target.getAttribute("id") === "view_attachments") {

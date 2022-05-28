@@ -148,9 +148,9 @@ export class URequestComponent implements OnInit {
   }
 
   defaultDialogConfig = {
-    width: "50vw",
-    minWidth: "50vw",
-    maxWidth: "50vw",
+    width: "20vw",
+    minWidth: "20vw",
+    maxWidth: "20vw",
     minHeight: "45vh",
     maxHeight: "75vh"
   }

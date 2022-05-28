@@ -50,9 +50,6 @@ export class ARequestActionComponent {
     this.docType = this.dialogData.data;
     this.createRequestForm = FormGroup;
     console.log("I'm dialog data : ", this.docType);
-  }
-
-  ngOnInit() {
     this.createRequestForm = this.fb.group({
       prn: new FormControl('', [Validators.required]),
       documentType: new FormControl('', [Validators.required]),
@@ -61,8 +58,19 @@ export class ARequestActionComponent {
       file: new FormControl('', [Validators.required]),
     });
   }
+
+  ngOnInit() {
+    
+  }
   onChange(event: any) {
     this.files = <Array<File>>event.target.files;
+    // this.file = event.target.files[0];
+  }
+
+  comments:any;
+  onChangeComment(event: any) {
+    console.log("Event : ", event.target.comments)
+    this.comments = event.target.comments;
     // this.file = event.target.files[0];
   }
 
@@ -81,18 +89,18 @@ export class ARequestActionComponent {
     formData.append('user', this.userInfo._id);
     formData.append('document_type', this.docType._id);
     formData.append('requiredValidations', 'scholarship');
-    formData.append('comments', this.createRequestForm.comment);
+    formData.append('comments', this.comments);
     console.log(this.createRequestForm.comments);
 
     this.userService.addRequest(this.getUrl(), formData).subscribe(
-      (data) => {
+      (data: any) => {
         if (data) {
           this.dialogRef.close();
         } else {
         }
         // console.log(data);
       },
-      (err) => {}
+      (err: any) => {}
     );
   }
 

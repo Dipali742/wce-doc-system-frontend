@@ -6,8 +6,9 @@
     </button>
   </h1>
   <mat-card>
-    <form [formGroup]="createRequestForm">
-      <div>
+    <!-- <form [formGroup]="createRequestForm">
+      <div class="row">
+      <div class="col-sm">
         <mat-form-field>
           <mat-label>PRN</mat-label>
           <input
@@ -22,7 +23,8 @@
 
           <mat-error>This field is required</mat-error>
         </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       </div>
+       <div class="col-sm">
         <mat-form-field>
           <mat-label>Document Type</mat-label>
           <input
@@ -38,13 +40,13 @@
           <mat-error>This field is required</mat-error>
         </mat-form-field>
       </div>
+      </div>
       <div>
         <mat-form-field>
           <mat-label>Approval from</mat-label>
           <input
             matIinput
             formControlName="approvalFrom"
-            matInput
             type="text"
             required
             [(ngModel)]="docType.sendTo"
@@ -53,24 +55,25 @@
 
           <mat-error>This field is required</mat-error>
         </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div>
+        
         <mat-form-field>
           <mat-label>Comments</mat-label>
-          <textarea
+          <input
             matIinput
             formControlName="comments"
-            matInput
             type="text"
             required
-          ></textarea>
+          />
 
           <mat-error>This field is required</mat-error>
         </mat-form-field>
       </div>
-      <div>
+      </div>
+      <div> -->
         <!-- <mat-form-field >
                 <mat-label>Upload document</mat-label> -->
-        <label>Fee Receipt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <label>Fee Receipt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input
           formControlName="file"
           type="file"
@@ -79,30 +82,78 @@
           (change)="onChange($event)"
           required
           multiple
-        />
+        /> -->
         <!-- <mat-error >This field is required</mat-error> -->
         <!-- </mat-form-field> -->
+      <!-- </div>
+    </form> -->
+    <form [formGroup]="createRequestForm">
+      <div  class="ng-grid">
+          <div >
+              <mat-form-field class="col-4" >
+                  <mat-label>PRN</mat-label>
+                  <input formControlName="prn" matInput type="text"  required   [(ngModel)]="userInfo.prn">
+                  <mat-error >This field is required</mat-error>
+              </mat-form-field>
+          </div>
+          <div >
+            <mat-form-field class="col-4" >
+                <mat-label>Document type</mat-label>
+                <input formControlName="documentType" matInput type="text"  required   [(ngModel)]="docType.name">
+                <mat-error >This field is required</mat-error>
+            </mat-form-field>
+        </div>
+        <div >
+          <mat-form-field >
+              <mat-label>approval from</mat-label>
+              <input formControlName="approvalFrom" matInput type="text"  required  [(ngModel)]="docType.sendTo">
+              <mat-error >This field is required</mat-error>
+          </mat-form-field>
+        </div>
+          <div >
+              <mat-form-field >
+                  <mat-label>Comments</mat-label>
+                  <input formControlName="comments" matInput type="text"  required  placeholder="abc" >
+                  <mat-error >This field is required</mat-error>
+              </mat-form-field>
+          </div>
+          <div>
+            <!-- <mat-form-field >
+              <mat-label>Comments</mat-label> -->
+            <input
+          formControlName="file"
+          type="file"
+          required
+          placeholder="file"
+          (change)="onChange($event)"
+          required
+          multiple
+        />
+      
+          </div>
+          
       </div>
-    </form>
+      <button
+      mat-raised-button
+      color="primary"
+      (click)="OnEdit()"
+      style="float: right"
+    >
+      Submit Request
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="OnCancel()"
+      style="float: right"
+    >
+      Cancel
+    </button>  
+  </form>
   </mat-card>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="OnEdit()"
-    style="float: right"
-  >
-    Submit Request
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="OnCancel()"
-    style="float: right"
-  >
-    Cancel
-  </button>
+  
 </mat-dialog-actions>
