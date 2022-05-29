@@ -8,6 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'u-dashboard',
@@ -18,26 +19,72 @@ export class UDashboardComponent {
   @ViewChild('sidenav')
   sidenav: MatSidenav;
   // : any;
-
-  constructor(private router: Router,
+  myRequestGridData: any;
+  userInfo: any;
+  constructor(
+    private router: Router,
     private bkd: BackendUrlComponent,
-    public sharedvar:SharedVariablesComponent,
+    public sharedvar: SharedVariablesComponent,
     private load_data: LoadUserDataComponent,
-    private observer: BreakpointObserver) {
-      // this.sidenav = MatSidenav;
-    }
- ngOnInit(): void {
+    private observer: BreakpointObserver,
+    private userService: UserService
+  ) {
+    // this.sidenav = MatSidenav;
+  }
+  ngOnInit(): void {
     // this.reload();
-    if(localStorage['WCEDOCReload']) {
+    if (localStorage['WCEDOCReload']) {
       localStorage.removeItem('WCEDOCReload');
-      this.reload();  
+      this.reload();
     }
-    if(localStorage['InfoWCEDoc']) {
+    if (localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
+      this.loadMyRequests();
     }
   }
-  
-  
+
+  approvedRequests = 0;
+  declinedRequests = 0;
+  reworkRequests = 0;
+  pendingRequests = 0;
+  totalRequests = 0;
+  loadMyRequests() {
+    this.userService.getDocumentTypes(this.getUrl()).subscribe(
+      (data: any[]) => {
+        if (data) {
+          this.myRequestGridData = data.filter(
+            (a) => a.user.prn === this.load_data.prn
+          );
+          this.totalRequests = this.myRequestGridData.length;
+          var i: any;
+          for (i = 0; i < this.myRequestGridData.length; i++) {
+            console.log(this.myRequestGridData[i].status);
+            if (this.myRequestGridData[i].status === 'Approved') {
+              this.approvedRequests += 1;
+            }
+            if (this.myRequestGridData[i].status === 'rejected') {
+              this.declinedRequests += 1;
+            }
+            if (this.myRequestGridData[i].status === 'rework') {
+              this.reworkRequests += 1;
+            }
+            if (this.myRequestGridData[i].status === 'pending') {
+              this.pendingRequests += 1;
+            }
+          }
+        } else {
+        }
+
+        // console.log(data);
+      },
+      (err: any) => {}
+    );
+  }
+
+  getUrl(): string {
+    return this.sharedvar.backend_url + '/requests';
+  }
+
   reload() {
     window.location.reload();
   }

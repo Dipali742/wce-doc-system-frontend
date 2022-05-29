@@ -5,7 +5,7 @@ export const STUDENT_REQUEST_GRID_COLUMNS = [
     cellRenderer: (params: any) => {
       if (params.data) {
         if (params.data.status === 'pending')
-          return " <a id='approve_action'>Approve</a> <a id='decline_action'>Decline</a>";
+          return " <a id='approve_action' style='color:blue;'>Approve</a> <a id='decline_action' style='color:blue;'>Decline</a>";
         else return params.data.status;
       }
       return '';
@@ -15,7 +15,41 @@ export const STUDENT_REQUEST_GRID_COLUMNS = [
   },
   {
     headerName: 'Student PRN',
-    field: 'user.prn',
+    field: 'UserPRN',
+    cellRenderer: (params: any) => {
+      if (params.data) {
+        return (
+          " <a id='view_student' style='color:blue;'>" +
+          params.data.user.prn +
+          '</a>'
+        );
+      }
+      return '<p>None</p>';
+    },
+    sortable: true,
+    filter: true,
+  },
+  {
+    headerName: 'Student Name',
+    field: 'user.fname',
+    sortable: true,
+    filter: true,
+  },
+  {
+    headerName: 'Course',
+    field: 'user.course',
+    sortable: true,
+    filter: true,
+  },
+  {
+    headerName: 'Branch',
+    field: 'user.branch',
+    sortable: true,
+    filter: true,
+  },
+  {
+    headerName: 'Year',
+    field: 'user.year',
     sortable: true,
     filter: true,
   },
@@ -47,8 +81,11 @@ export const STUDENT_REQUEST_GRID_COLUMNS = [
     headerName: 'Attachments',
     field: 'files',
     cellRenderer: (params: any) => {
-      if (params.data.files.length != 0) {
-        return " <a id='view_action'>View</a>";
+      if (
+        params.data.files.length != 0 &&
+        params.data.document_type.requiredDoc.length != 0
+      ) {
+        return " <a id='view_action' style='color:MediumSeaGreen;'>View</a>";
       }
       return '<p>None</p>';
     },
@@ -71,7 +108,7 @@ export const STUDENT_REQUEST_GRID_COLUMNS = [
         // return " <a id='download_action'>Download</a>";
         return "<a href='" + url + "' download target='_blank'>Download</a>";
       }
-      return '<p>Pending approval</p>';
+      return '<p>' + params.data.status + '</p>';
     },
     sortable: true,
     filter: true,

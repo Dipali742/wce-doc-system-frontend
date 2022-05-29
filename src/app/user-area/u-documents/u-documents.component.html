@@ -1,15 +1,22 @@
 <div *ngIf="!sharedvar.isLoggedIn">
-    <mat-card >
-        Forbidden : Please login to access this page
-    </mat-card>
+  <mat-card> Forbidden : Please login to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-    <mat-card >
-        You're admin. Please login as user to access this page
-    </mat-card>
+  <mat-card> You're admin. Please login as user to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
-    <mat-card>
-        logged in as user : {{sharedvar.isAdmin}}
-    </mat-card>
+  <mat-card>
+    <!-- logged in as user : {{sharedvar.isAdmin}} -->
+    <ag-grid-angular
+      style="height: 500px"
+      class="ag-theme-alpine"
+      [rowData]="myRequestGridData"
+      [columnDefs]="myRequestColumns"
+      rowSelection="multiple"
+      sideBar="{toolPanels: ['columns','filters']}"
+      [pagination]="true"
+      [paginationPageSize]="10"
+    >
+    </ag-grid-angular>
+  </mat-card>
 </div>

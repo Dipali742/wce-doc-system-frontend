@@ -1,15 +1,77 @@
 <div *ngIf="!sharedvar.isLoggedIn">
-    <mat-card >
-        Forbidden : Please login to access this page
-    </mat-card>
+  <mat-card> Forbidden : Please login to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-    <mat-card >
-        You're admin. Please login as user to access this page
-    </mat-card>
+  <mat-card> You're admin. Please login as user to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
+  <mat-card>
+    <!-- logged in as user : {{sharedvar.isAdmin}} : user/profile -->
+    <h1>My Profile</h1>
     <mat-card>
-        logged in as user : {{sharedvar.isAdmin}} : user/profile
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">PRN</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.prn }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Name</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.fname }} {{ userInfo.lname }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Course</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.course }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Branch</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.branch }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Phone Number</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.phone }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Email ID</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.email }}</div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">Username</div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">{{ userInfo.username }}</div>
+        </div>
+      </div>
+      <br />
     </mat-card>
+  </mat-card>
 </div>

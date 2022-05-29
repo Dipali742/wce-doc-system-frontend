@@ -1,134 +1,135 @@
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { Component, Inject } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MatChipInputEvent } from "@angular/material/chips";
-
-import { MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, Inject } from '@angular/core';
 import {
-    MAT_DIALOG_DATA
-} from "@angular/material/dialog";
-import { BackendUrlComponent } from "src/app/common/backend-url";
-import { LoadUserDataComponent } from "src/app/common/load-user-data";
-import { SharedVariablesComponent } from "src/app/common/shared-variables";
-import { UserService } from "src/app/_services/user.service";
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BackendUrlComponent } from 'src/app/common/backend-url';
+import { LoadUserDataComponent } from 'src/app/common/load-user-data';
+import { SharedVariablesComponent } from 'src/app/common/shared-variables';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-    selector: "dialog-b",
-    templateUrl: 'a-document-action.component.html',
-    styleUrls: ['../a-document-types.component.css']
+  selector: 'dialog-b',
+  templateUrl: 'a-document-action.component.html',
+  styleUrls: ['../a-document-types.component.css'],
 })
 export class ADocumentActionComponent {
-    actionType: any;
-    dialogData: any;
-    actionsDataColumns: any;
-    actionsData: any;
-    addComment: any;
-    documentTypeForm: any;
-    file: File;
+  actionType: any;
+  dialogData: any;
+  actionsDataColumns: any;
+  actionsData: any;
+  addComment: any;
+  documentTypeForm: any;
+  file: File;
+  ApprovalFromVar = ['admin', 'scholarship'];
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private load_data: LoadUserDataComponent,
+    private fb: FormBuilder,
+    private userService: UserService,
+    public dialogRef: MatDialogRef<ADocumentActionComponent>,
+    private bkd: BackendUrlComponent,
+    public sharedvar: SharedVariablesComponent
+  ) {
+    this.actionType = data.action;
+    this.dialogData = data.ComponentData;
+    this.addComment = FormGroup;
+    this.documentTypeForm = FormGroup;
+    console.log(this.dialogData);
+  }
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-        private load_data: LoadUserDataComponent,
-        private fb: FormBuilder,
-        private userService: UserService,
-        public dialogRef: MatDialogRef<ADocumentActionComponent>,
-        private bkd: BackendUrlComponent,
-        public sharedvar: SharedVariablesComponent,) {
-        this.actionType = data.action;
-        this.dialogData = data.ComponentData;
-        this.addComment = FormGroup
-        this.documentTypeForm = FormGroup;
-        console.log(this.dialogData);
+  ngOnInit() {
+    this.documentTypeForm = this.fb.group({
+      name: new FormControl('', [Validators.required]),
+      sendTo: new FormControl('', [Validators.required]),
+      requiredDoc: new FormControl(''),
+    });
+  }
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.dialogData.requiredDoc.push(value.trim());
     }
 
-    ngOnInit() {
-        this.documentTypeForm = this.fb.group({
-            name: new FormControl('', [Validators.required]),
-            sendTo: new FormControl('', [Validators.required]),
-            requiredDoc: new FormControl(''),
-        })
+    // Reset the input value
+    if (input) {
+      input.value = '';
     }
+  }
 
-    visible = true;
-    selectable = true;
-    removable = true;
-    addOnBlur = true;
-    readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  remove(docType: any): void {
+    const index = this.dialogData.requiredDoc.indexOf(docType);
 
+    if (index >= 0) {
+      this.dialogData.requiredDoc.splice(index, 1);
+    }
+  }
 
-    add(event: MatChipInputEvent): void {
-        const input = event.input;
-        const value = event.value;
-
-        // Add our fruit
-        if ((value || '').trim()) {
-            this.dialogData.requiredDoc.push(value.trim());
+  Onsubmit() {
+    this.dialogRef.close();
+  }
+  OnDelete() {
+    console.log('its this stupid id dipps', this.dialogData._id);
+    this.userService.deleteDocumentType(this.getUrlForDelete()).subscribe(
+      (data) => {
+        if (data) {
+          this.dialogRef.close();
+        } else {
         }
+        // console.log(data);
+      },
+      (err) => {}
+    );
+  }
 
-        // Reset the input value
-        if (input) {
-            input.value = '';
-        }
-    }
+  getUrlForDelete(): string {
+    return this.sharedvar.backend_url + '/documents/' + this.dialogData._id;
+  }
 
-    remove(docType: any): void {
-        const index = this.dialogData.requiredDoc.indexOf(docType);
+  getUrlForEdit(): string {
+    return this.sharedvar.backend_url + '/documents/' + this.dialogData._id;
+  }
 
-        if (index >= 0) {
-            this.dialogData.requiredDoc.splice(index, 1);
-        }
-    }
+  docTypes: string[] = [];
+  OnEdit() {
+    console.log('its this stupid id dipps', this.dialogData._id);
 
-    Onsubmit() {
-        this.dialogRef.close();
-    }
-    OnDelete() {
-        console.log("its this stupid id dipps", this.dialogData._id)
-        this.userService.deleteDocumentType(this.getUrlForDelete()).subscribe(
-            data => {
-                if (data) {
-                    this.dialogRef.close();
-                }
-                else {
-
-                }
-                // console.log(data);
-            },
-            err => {
-
-            }
-        );
-    }
-
-    getUrlForDelete(): string {
-        return (this.sharedvar.backend_url + '/documents/' + this.dialogData._id);
-    }
-
-    getUrlForEdit(): string {
-        return (this.sharedvar.backend_url + '/documents/' + this.dialogData._id);
-    }
-
-    docTypes: string[] = [];
-    OnEdit() {
-        console.log("its this stupid id dipps", this.dialogData._id)
-
-
-        this.dialogData.requiredDoc.forEach((element: string) => {
-            this.docTypes.push(element);
-        });
-        this.documentTypeForm.value.requiredDoc = this.docTypes;
-        this.userService.updateDocumentType(this.getUrlForEdit(), this.documentTypeForm.value).subscribe(
-            data => {
-                if (data) {
-                    this.dialogRef.close();
-                }
-                else {
-
-                }
-                // console.log(data);
-            },
-            err => {
-
-            }
-        );
-    }
+    this.dialogData.requiredDoc.forEach((element: string) => {
+      this.docTypes.push(element);
+    });
+    this.documentTypeForm.value.requiredDoc = this.docTypes;
+    this.userService
+      .updateDocumentType(this.getUrlForEdit(), this.documentTypeForm.value)
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.dialogRef.close();
+          } else {
+          }
+          // console.log(data);
+        },
+        (err) => {}
+      );
+  }
 }

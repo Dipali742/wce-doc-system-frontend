@@ -31,7 +31,7 @@ export class UMyRequestComponent implements OnInit {
     if (localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
       this.userInfo = this.sharedvar.userInfo;
-
+      // console.log('heyyy', this.userInfo);
       this.loadMyRequests();
     }
   }
@@ -43,7 +43,7 @@ export class UMyRequestComponent implements OnInit {
           console.log('nishi data', this.userInfo);
           console.log('Hi sailee ', data);
           this.myRequestGridData = data.filter(
-            (a: { user: { prn: any } }) => a.user.prn === this.userInfo.prn
+            (a: { user: { prn: any } }) => a.user.prn === this.load_data.prn
           );
         } else {
         }

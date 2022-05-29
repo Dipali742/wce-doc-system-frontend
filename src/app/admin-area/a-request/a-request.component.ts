@@ -36,7 +36,7 @@ export class ARequestComponent implements OnInit {
 
     this.loadStudentRequests();
   }
-
+  successAlert: Boolean = false;
   defaultDialogConfig = {
     width: '50vw',
     minWidth: '50vw',
@@ -56,6 +56,12 @@ export class ARequestComponent implements OnInit {
         },
         ...this.defaultDialogConfig,
       });
+
+      modalRef.afterClosed().subscribe((result) => {
+        console.log(result);
+
+        this.loadStudentRequests();
+      });
     } else {
       const modalRef = this.matDialog.open(AViewRequestComponent, {
         data: {
@@ -64,6 +70,9 @@ export class ARequestComponent implements OnInit {
         },
         ...this.defaultDialogConfig,
       });
+      modalRef.afterClosed().subscribe((result) => {
+        this.loadStudentRequests();
+      });
     }
   }
 
@@ -71,7 +80,10 @@ export class ARequestComponent implements OnInit {
     this.userService.getStudentRequest(this.getUrl()).subscribe(
       (data) => {
         if (data) {
-          this.studentRequestGridData = data;
+          this.studentRequestGridData = data.filter(
+            (a: { status: string }) =>
+              a.status === 'pending' || a.status === 'rework'
+          );
           console.log('Hi', this.studentRequestGridData);
         } else {
         }
@@ -107,13 +119,9 @@ export class ARequestComponent implements OnInit {
       }
     }
 
-    if (type === 'cellClicked' && column.colId === 'admin_files') {
-      //   console.log(event);
-      //   if(event.event.target.getAttribute("id") === "view_attachments") {
-      //     console.log("hi");
-      //   }
-      if (event.event.target.getAttribute('id') === 'download_action') {
-        console.log('view');
+    if (type === 'cellClicked' && column.colId === 'UserPRN') {
+      if (event.event.target.getAttribute('id') === 'view_student') {
+        this.openDialog('view_student', data);
       }
     }
   }

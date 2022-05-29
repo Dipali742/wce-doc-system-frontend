@@ -6,134 +6,87 @@
     </button>
   </h1>
   <mat-card>
-    <!-- <form [formGroup]="createRequestForm">
+    <mat-card>
+      <form [formGroup]="createRequestForm">
+        <div class="ng-grid">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>PRN</mat-label>
+                <input
+                  formControlName="prn"
+                  matInput
+                  type="text"
+                  required
+                  [(ngModel)]="userInfo.prn"
+                />
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field class="col-4">
+                <mat-label>Document type</mat-label>
+                <input
+                  formControlName="documentType"
+                  matInput
+                  type="text"
+                  required
+                  [(ngModel)]="docType.name"
+                />
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
       <div class="row">
-      <div class="col-sm">
-        <mat-form-field>
-          <mat-label>PRN</mat-label>
-          <input
-            [readOnly]="true"
-            matIinput
-            formControlName="prn"
-            matInput
-            type="text"
-            required
-            [(ngModel)]="userInfo.prn"
-          />
-
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-       </div>
-       <div class="col-sm">
-        <mat-form-field>
-          <mat-label>Document Type</mat-label>
-          <input
-            matIinput
-            formControlName="documentType"
-            matInput
-            type="text"
-            required
-            [(ngModel)]="docType.name"
-            [readOnly]="true"
-          />
-
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-      </div>
-      </div>
-      <div>
-        <mat-form-field>
-          <mat-label>Approval from</mat-label>
-          <input
-            matIinput
-            formControlName="approvalFrom"
-            type="text"
-            required
-            [(ngModel)]="docType.sendTo"
-            [readOnly]="true"
-          />
-
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-        <div>
-        
-        <mat-form-field>
-          <mat-label>Comments</mat-label>
-          <input
-            matIinput
-            formControlName="comments"
-            type="text"
-            required
-          />
-
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-      </div>
-      </div>
-      <div> -->
-    <!-- <mat-form-field >
-                <mat-label>Upload document</mat-label> -->
-    <!-- <label>Fee Receipt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input
-          formControlName="file"
-          type="file"
-          required
-          placeholder="file"
-          (change)="onChange($event)"
-          required
-          multiple
-        /> -->
-    <!-- <mat-error >This field is required</mat-error> -->
-    <!-- </mat-form-field> -->
-    <!-- </div>
-    </form> -->
-    <form [formGroup]="createRequestForm">
-      <div class="ng-grid">
-        <div>
-          <mat-form-field class="col-4">
-            <mat-label>PRN</mat-label>
-            <input
-              formControlName="prn"
-              matInput
-              type="text"
-              required
-              [(ngModel)]="userInfo.prn"
-            />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
+        <div class="col-md-6">
+          <form [formGroup]="createRequestForm">
+            <mat-form-field>
+              <mat-label>approval from</mat-label>
+              <input
+                formControlName="approvalFrom"
+                matInput
+                type="text"
+                required
+                [(ngModel)]="docType.sendTo"
+              />
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+          </form>
         </div>
-        <div>
-          <mat-form-field class="col-4">
-            <mat-label>Document type</mat-label>
-            <input
-              formControlName="documentType"
-              matInput
-              type="text"
-              required
-              [(ngModel)]="docType.name"
-            />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field>
-            <mat-label>approval from</mat-label>
-            <input
-              formControlName="approvalFrom"
-              matInput
-              type="text"
-              required
-              [(ngModel)]="docType.sendTo"
-            />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-        </div>
+        <div class="col-md-6">
+          <form [formGroup]="addComment">
+            <div>
+              <mat-form-field>
+                <mat-label>Add Comment here</mat-label>
+                <input
+                  matIinput
+                  formControlName="comment"
+                  matInput
+                  type="text"
+                  required
+                  placeholder="abc"
+                />
 
-        <div>
-          <!-- <mat-form-field >
-              <mat-label>Comments</mat-label> -->
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <!-- <div *ngFor="let files of docType.requiredDoc"> -->
+      <div class="row" *ngIf="docType.requiredDoc.length != 0">
+        <div class="col-md-2">
+          <div class="leftside">
+            {{ docType.requiredDoc }}
+          </div>
+        </div>
+        <div class="col-md-4">
           <input
-            formControlName="file"
+            id="{{ files }}"
             type="file"
             required
             placeholder="file"
@@ -143,34 +96,21 @@
           />
         </div>
       </div>
-    </form>
-    <form [formGroup]="addComment">
-      <div>
-        <mat-form-field>
-          <mat-label>Add Comment here</mat-label>
-          <textarea
-            matIinput
-            formControlName="comment"
-            matInput
-            type="text"
-            required
-            placeholder="abc"
-          >
-          </textarea>
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-      </div>
-    </form>
+      <br />
+      <!-- </div> -->
+    </mat-card>
   </mat-card>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
+
   <button
     mat-raised-button
     color="primary"
     (click)="OnEdit()"
     style="float: right"
+    [disabled]="checkvalid()"
   >
     Submit Request
   </button>
@@ -182,4 +122,21 @@
   >
     Cancel
   </button>
+  <br /><br />
+  <div class="alert alert-danger" role="alert" *ngIf="errorFailed">
+    Something went wrong. Please provide sufficient data and try again!<mat-icon
+      style="float: right"
+      (click)="errorFailed = false"
+      matSuffix
+      >close</mat-icon
+    >
+  </div>
+  <div class="alert alert-success alert-dismissable" *ngIf="successAlert">
+    Created new request<mat-icon
+      style="float: right"
+      (click)="successAlert = false"
+      matSuffix
+      >close</mat-icon
+    >
+  </div>
 </mat-dialog-actions>

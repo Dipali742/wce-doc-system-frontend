@@ -1,13 +1,77 @@
 <div *ngIf="!sharedvar.isLoggedIn">
-    <mat-card >
-        Forbidden : Please login to access this page
-    </mat-card>
+  <mat-card> Forbidden : Please login to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
-    <mat-card >
-        You're user. Please login as admin to access this page
-    </mat-card>
+  <mat-card> You're user. Please login as admin to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
-   Admin dashboard - Under progress
+  <div class="row">
+    <mat-card>
+      <div>Total Requests : {{ totalRequests }}</div>
+    </mat-card>
+  </div>
+  <div class="row">
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total Approved Requests</div>
+        <div>{{ approvedRequests }}</div>
+      </mat-card>
+    </mat-card>
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total Declined Requests</div>
+        <div>{{ declinedRequests }}</div>
+      </mat-card>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Rework Requests</div>
+        <div>{{ reworkRequests }}</div>
+      </mat-card>
+    </mat-card>
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total Pending Requests</div>
+        <div>{{ pendingRequests }}</div>
+      </mat-card>
+    </mat-card>
+  </div>
+  <br /><br />
+  <div class="row">
+    <mat-card>
+      <div>Total students : {{ totalStudents }}</div>
+    </mat-card>
+  </div>
+  <div class="row">
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total First year students</div>
+        <div>{{ firstYear }}</div>
+      </mat-card>
+    </mat-card>
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total second year students</div>
+        <div>{{ secondYear }}</div>
+      </mat-card>
+    </mat-card>
+  </div>
+  <div class="row">
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total third year students</div>
+        <div>{{ thirdYear }}</div>
+      </mat-card>
+    </mat-card>
+    <mat-card class="col-md-6">
+      <mat-card>
+        <div>Total final year students</div>
+        <div>{{ fourthYear }}</div>
+      </mat-card>
+    </mat-card>
+  </div>
+  <br /><br />
 </div>

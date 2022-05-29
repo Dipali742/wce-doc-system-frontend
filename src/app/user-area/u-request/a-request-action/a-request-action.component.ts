@@ -35,6 +35,7 @@ export class ARequestActionComponent {
   docType: any;
   files: Array<File> = [];
   addComment: any;
+  submitEnable: false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -65,13 +66,34 @@ export class ARequestActionComponent {
       approvalFrom: new FormControl('', [Validators.required]),
       comments: new FormControl('', [Validators.required]),
       file: new FormControl('', [Validators.required]),
+      filename: new FormControl('', [Validators.required]),
     });
   }
   onChange(event: any) {
     this.files = <Array<File>>event.target.files;
+
     // this.file = event.target.files[0];
   }
 
+  errorFailed: Boolean = false;
+  errorMessage = '';
+  successAlert: Boolean = false;
+  successMessage = '';
+  checkvalid() {
+    console.log('checkvalid');
+    if (this.docType.requiredDoc.length !== 0) {
+      if (this.addComment.value.comment !== '' && this.files.length !== 0) {
+        return false;
+      }
+      return true;
+    } else {
+      console.log(this.addComment.value.comment);
+      if (this.addComment.value.comment !== '') {
+        return false;
+      }
+      return true;
+    }
+  }
   getUrl(): string {
     return this.sharedvar.backend_url + '/requests';
   }
@@ -93,13 +115,19 @@ export class ARequestActionComponent {
     this.userService.addRequest(this.getUrl(), formData).subscribe(
       (data: any) => {
         if (data) {
-          this.dialogRef.close();
+          this.successAlert = true;
         } else {
         }
         // console.log(data);
       },
-      (err: any) => {}
+      (err: any) => {
+        this.errorFailed = true;
+      }
     );
+
+    setTimeout(() => {
+      this.dialogRef.close(), 5000;
+    });
   }
 
   OnCancel() {

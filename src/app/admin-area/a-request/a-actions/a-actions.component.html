@@ -22,9 +22,22 @@
       [paginationPageSize]="10"
     >
     </ag-grid-angular>
+    <br /><br />
+    <div class="row">
+      <div class="col-md-2">
+        <p>Choose action type</p>
+      </div>
+      <div class="col-md-10">
+        <mat-radio-group [(ngModel)]="currentStatus">
+          <mat-radio-button *ngFor="let status of statuses" [value]="status">
+            {{ status }} &nbsp;
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
 
     <form [formGroup]="addComment">
-      <mat-form-field>
+      <mat-form-field class="col-6">
         <mat-label>Add Comment here</mat-label>
         <textarea
           matIinput
@@ -38,12 +51,6 @@
         <mat-error>This field is required</mat-error>
       </mat-form-field>
     </form>
-
-    <mat-radio-group [(ngModel)]="currentStatus">
-      <mat-radio-button *ngFor="let status of statuses" [value]="status">
-        {{ status }}
-      </mat-radio-button>
-    </mat-radio-group>
   </div>
   <div *ngIf="actionType === 'approve_action'">
     <h1>
@@ -68,24 +75,27 @@
       [paginationPageSize]="10"
     >
     </ag-grid-angular>
-
+    <br /><br />
     <form [formGroup]="approveRequestForm">
-      <div>
-        <input
-          formControlName="file"
-          type="file"
-          required
-          placeholder="file"
-          (change)="onChange($event)"
-          required
-          multiple
-        />
+      <div class="row">
+        <div class="col-md-4">Upload new document</div>
+        <div class="col-md-8">
+          <input
+            formControlName="file"
+            type="file"
+            required
+            placeholder="file"
+            (change)="onChange($event)"
+            required
+            multiple
+          />
+        </div>
       </div>
     </form>
 
     <form [formGroup]="addComment">
       <div>
-        <mat-form-field>
+        <mat-form-field class="col-6">
           <mat-label>Add Comment here</mat-label>
           <textarea
             matIinput
@@ -111,16 +121,43 @@
     color="primary"
     (click)="OnDecline()"
     style="float: right"
+    [disabled]="valid()"
   >
     Decline
   </button>
+
   <button
     *ngIf="actionType === 'approve_action'"
     mat-raised-button
     color="primary"
     (click)="OnApprove()"
     style="float: right"
+    [disabled]="validApproval()"
   >
     Approve
   </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="OnCancel()"
+    style="float: right"
+  >
+    Cancel
+  </button>
+
+  <br /><br />
+  <div class="alert alert-danger" role="alert" *ngIf="errorFailed">
+    Something went wrong. Please provide sufficient data and try again!<mat-icon
+      style="float: right"
+      (click)="errorFailed = false"
+      matSuffix
+      >close</mat-icon
+    >
+  </div>
+  <div class="alert alert-success alert-dismissable" *ngIf="successAlert">
+    {{ successMessage
+    }}<mat-icon style="float: right" (click)="successAlert = false" matSuffix
+      >close</mat-icon
+    >
+  </div>
 </mat-dialog-actions>

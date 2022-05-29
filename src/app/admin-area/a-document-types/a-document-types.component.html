@@ -1,70 +1,117 @@
 <div *ngIf="!sharedvar.isLoggedIn">
-    <mat-card>
-        Forbidden : Please login to access this page
-    </mat-card>
+  <mat-card> Forbidden : Please login to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && !sharedvar.isAdmin">
-    <mat-card>
-        You're user. Please login as admin to access this page
-    </mat-card>
+  <mat-card> You're user. Please login as admin to access this page </mat-card>
 </div>
 <div *ngIf="sharedvar.isLoggedIn && sharedvar.isAdmin">
+  <mat-card>
+    <!-- logged in as admin : {{sharedvar.isAdmin}} -->
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Available Document Types">
+        <ag-grid-angular
+          style="height: 500px"
+          class="ag-theme-alpine"
+          [rowData]="documentTypesGridData"
+          [columnDefs]="documentTypesGridColumns"
+          rowSelection="multiple"
+          sideBar="{toolPanels: ['columns','filters']}"
+          [pagination]="true"
+          [paginationPageSize]="10"
+          (cellClicked)="
+            clickedOnActions($event.type, $event.column, $event.data, $event)
+          "
+        >
+        </ag-grid-angular>
+      </mat-tab>
+      <mat-tab label="Add Document Type">
+        <form [formGroup]="addDocTypeForm">
+          <div>
+            <mat-form-field class="col-4">
+              <mat-label>Document Name</mat-label>
+              <input
+                formControlName="name"
+                matInput
+                type="text"
+                required
+                placeholder="1234"
+              />
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="col-4">
+              <mat-label>Approval from</mat-label>
+              <mat-select required formControlName="sendTo">
+                <mat-option *ngFor="let af of ApprovalFromVar" [value]="af">
+                  {{ af }}
+                </mat-option>
+              </mat-select>
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="col-4" class="example-chip-list">
+              <mat-chip-list #chipList>
+                <input
+                  placeholder="Required documents"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)"
+                  class="col-4"
+                />
+              </mat-chip-list>
+            </mat-form-field>
+            <mat-chip
+              *ngFor="let docType of documentTypes"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(docType)"
+            >
+              {{ docType.name }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </div>
+        </form>
 
-    <mat-card>
-        <!-- logged in as admin : {{sharedvar.isAdmin}} -->
-        <mat-tab-group (selectedTabChange)="onTabChange($event)">
-            <mat-tab label="Available Document Types">
+        <div class="button-row">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onSubmit()"
+            [disabled]="!addDocTypeForm.valid"
+          >
+            Create
+          </button>
+          &nbsp;&nbsp;<button
+            mat-raised-button
+            color="primary"
+            (click)="resetForm()"
+          >
+            Reset
+          </button>
+        </div>
+        <br /><br />
+        <div class="alert alert-danger" role="alert" *ngIf="errorFailed">
+          Something went wrong. Fill all fields correctly and try
+          again!<mat-icon
+            style="float: right"
+            (click)="errorFailed = false"
+            matSuffix
+            >close</mat-icon
+          >
+        </div>
 
-                <ag-grid-angular style=" height:500px; " class="ag-theme-alpine" [rowData]="documentTypesGridData"
-                    [columnDefs]="documentTypesGridColumns" rowSelection="multiple"
-                    sideBar="{toolPanels: ['columns','filters']}" [pagination]="true" [paginationPageSize]="10"
-                    (cellClicked)="clickedOnActions($event.type,$event.column,$event.data,$event)">
-                </ag-grid-angular>
-            </mat-tab>
-            <mat-tab label="Add Document Type">
-                <form [formGroup]="addDocTypeForm">
-                    <div>
-                        <mat-form-field>
-                            <mat-label>Document Name</mat-label>
-                            <input formControlName="name" matInput type="text" required placeholder="1234">
-                            <mat-error>This field is required</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field>
-                            <mat-label>Approval from</mat-label>
-                            <mat-select required formControlName="sendTo">
-                                <mat-option *ngFor="let af of ApprovalFromVar" [value]="af">
-                                    {{af}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error>This field is required</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field class="example-chip-list">
-                            <mat-chip-list #chipList>
-
-                                <input placeholder="Required documents" [matChipInputFor]="chipList"
-                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                    [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-                            </mat-chip-list>
-
-                        </mat-form-field>
-                        <mat-chip *ngFor="let docType of documentTypes" [selectable]="selectable"
-                            [removable]="removable" (removed)="remove(docType)">
-                            {{docType.name}}
-                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
-                    </div>
-                </form>
-
-                <div class="button-row">
-                    <button mat-raised-button color="primary" (click)="onSubmit()"
-                        [disabled]="!addDocTypeForm.valid">Create</button>
-                    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="resetForm()">Reset</button>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </mat-card>
+        <div class="alert alert-success alert-dismissable" *ngIf="successAlert">
+          Successfully added new document type<mat-icon
+            style="float: right"
+            (click)="successAlert = false"
+            matSuffix
+            >close</mat-icon
+          >
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
 </div>

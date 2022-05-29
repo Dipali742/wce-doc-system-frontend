@@ -1,87 +1,86 @@
-import { Component, Inject } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-
-import { MatDialogModule,MatDialogRef,MatDialogTitle } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 import {
-  MAT_DIALOG_DATA
-} from "@angular/material/dialog";
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: "dialog-b",
-  templateUrl: 'u-view-request.component.html'
+  selector: 'dialog-b',
+  templateUrl: 'u-view-request.component.html',
 })
 export class UViewRequestComponent {
-    actionType:any;
-    dialogData : any;
-    actionsDataColumns : any;
-    actionsData: any;
-    addComment : any;
-    approveRequestForm: any;
-    file: File;
+  actionType: any;
+  dialogData: any;
+  actionsDataColumns: any;
+  actionsData: any;
+  addComment: any;
+  approveRequestForm: any;
+  file: File;
+  DocumentsUploaded = [
+    {
+      name: '',
+      path: '',
+    },
+  ];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  private fb: FormBuilder,
-  public dialogRef: MatDialogRef<UViewRequestComponent>,) {
-      this.actionType = data.action;
-      this.dialogData = data;
-      this.addComment = FormGroup
-      this.approveRequestForm = FormGroup;
-      this.setDialogData();
-      console.log(this.dialogData);
+  filename: any;
+  filepath: any;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<UViewRequestComponent>
+  ) {
+    this.actionType = data.action;
+    this.dialogData = data;
+    this.addComment = FormGroup;
+    this.approveRequestForm = FormGroup;
+    console.log(this.dialogData);
+    var e: any;
   }
 
   ngOnInit() {
-    this.addComment = this.fb.group({
-        comment : new FormControl('', [Validators.required])
-      })
-    
-      this.approveRequestForm = this.fb.group({
-        comment : new FormControl('', [Validators.required]),
-        file : new FormControl('', [Validators.required])
-      })
+    var i: number;
+    for (
+      i = 0;
+      i < this.dialogData.ComponentData.document_type.requiredDoc.length;
+      i++
+    ) {
+      console.log(
+        this.dialogData.ComponentData.document_type.requiredDoc[i],
+        ' ',
+        this.dialogData.ComponentData.files[i]
+      );
+
+      this.DocumentsUploaded.push({
+        name: this.dialogData.ComponentData.document_type.requiredDoc[i],
+        path:
+          'https://wce-tracker-api.herokuapp.com/' +
+          this.dialogData.ComponentData.files[i].filePath,
+      });
+    }
+    console.log('sdfsfdfh', this.DocumentsUploaded);
   }
 
   onChange(event: any) {
     this.file = event.target.files[0];
-}
+  }
 
-// OnClick of button Upload
-onUpload() {
+  // OnClick of button Upload
+  onUpload() {
     console.log(this.file);
-    
-}
+  }
 
-  setDialogData() {
-      this.actionsDataColumns = [
-          {
-              headerName: "Attribute Name",
-              field: "attributeNames",
-              width:350
-          },
-          {
-            headerName: "value",
-            field: "attributeDescription",
-            width:350
-           }
-        ]
-
-        this.actionsData = [
-            {
-                attributeNames:"Student PRN",
-                attributeDescription: this.dialogData.ComponentData.user.prn
-            },
-            {
-                attributeNames:"Document Type",
-                attributeDescription: this.dialogData.ComponentData.document_type.name
-            },
-            {
-                attributeNames:"Requested at",
-                attributeDescription: this.dialogData.ComponentData.requested_at
-            }
-        ]
-      }
-      Onsubmit() {
-        this.dialogRef.close();
-    }
-  
+  Onsubmit() {
+    this.dialogRef.close();
+  }
 }

@@ -1,14 +1,71 @@
 <mat-dialog-content>
-    <div *ngIf="actionType === 'view_action'">
-        <h1> View Attachments
-            <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right;">
-                <mat-icon matSuffix>close</mat-icon>
-            </button>
-        </h1>
-    </div>
-    
+  <div *ngIf="actionType === 'view_action'">
+    <h1>
+      View Attachments
+      <button
+        mat-icon-button
+        tabindex="-1"
+        mat-dialog-close
+        style="float: right"
+      >
+        <mat-icon matSuffix>close</mat-icon>
+      </button>
+    </h1>
+    <mat-card>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="leftside">
+            <h2><b>Document name</b></h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="rightside">
+            <h1><b>Action</b></h1>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let file of DocumentsUploaded; let indexOfelement = index">
+        <div class="row" *ngIf="file.name">
+          <div class="col-md-6">
+            <div class="leftside">
+              {{ file.name }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <a href="{{ file.path }}" download target="_blank">Download</a>
+          </div>
+        </div>
+        <br />
+      </div>
+    </mat-card>
+  </div>
+  <div *ngIf="actionType === 'view_student'">
+    <h1>
+      View Student data
+
+      <button
+        mat-icon-button
+        tabindex="-1"
+        mat-dialog-close
+        style="float: right"
+      >
+        <mat-icon matSuffix>close</mat-icon>
+      </button>
+    </h1>
+    <ag-grid-angular
+      style="height: 250px"
+      class="ag-theme-alpine"
+      [rowData]="studentRequestGridData"
+      [columnDefs]="studentRequestGridColumns"
+      rowSelection="multiple"
+      sideBar="{toolPanels: ['columns','filters']}"
+      [pagination]="true"
+      [paginationPageSize]="10"
+    >
+    </ag-grid-angular>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Close</button>
+  <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
 </mat-dialog-actions>

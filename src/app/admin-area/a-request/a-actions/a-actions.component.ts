@@ -112,12 +112,26 @@ export class AActionComponent {
       .declineRequest(this.getUrlDecline(), sendDataToBackend)
       .subscribe(
         (data) => {
-          console.log(data);
+          this.successAlert = true;
+          if (this.currentStatus === 'rework') {
+            this.successMessage = 'Request sent to rework';
+          } else {
+            this.successMessage = 'Request declined';
+          }
+          setTimeout(() => {
+            this.OnCancel(), 5000;
+          });
         },
-        (err) => {}
+        (err) => {
+          this.errorFailed = true;
+        }
       );
   }
 
+  errorFailed: Boolean = false;
+  errorMessage = '';
+  successAlert: Boolean = false;
+  successMessage = '';
   OnApprove() {
     const formData: any = new FormData();
     const files: Array<File> = this.files;
@@ -132,8 +146,15 @@ export class AActionComponent {
     this.userService.declineRequest(this.getUrlApprove(), formData).subscribe(
       (data) => {
         console.log(data);
+        this.successAlert = true;
+        this.successMessage = 'Request approved';
+        setTimeout(() => {
+          this.OnCancel(), 5000;
+        });
       },
-      (err) => {}
+      (err) => {
+        this.errorFailed = true;
+      }
     );
   }
 
@@ -152,7 +173,17 @@ export class AActionComponent {
       this.dialogData.ComponentData._id
     );
   }
-  Onsubmit() {
+  OnCancel() {
     this.dialogRef.close();
+  }
+
+  valid() {
+    if (this.addComment.value.comment != '') return false;
+    return true;
+  }
+  validApproval() {
+    if (this.addComment.value.comment != '' && this.files.length != 0)
+      return false;
+    return true;
   }
 }

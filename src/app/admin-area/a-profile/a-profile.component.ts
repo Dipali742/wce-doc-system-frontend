@@ -7,25 +7,26 @@ import { SharedVariablesComponent } from 'src/app/common/shared-variables';
 @Component({
   selector: 'app-a-profile',
   templateUrl: './a-profile.component.html',
-  styleUrls: ['./a-profile.component.css']
+  styleUrls: ['./a-profile.component.css'],
 })
 export class AProfileComponent implements OnInit {
-
-  constructor( private router: Router,
+  adminInfo: any;
+  constructor(
+    private router: Router,
     private bkd: BackendUrlComponent,
-    public sharedvar:SharedVariablesComponent,
-    private load_data: LoadUserDataComponent) {
-   
-   }
+    public sharedvar: SharedVariablesComponent,
+    private load_data: LoadUserDataComponent
+  ) {}
 
   ngOnInit(): void {
     // this.reload();
-    if(localStorage['InfoWCEDoc']) {
+    if (localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
+      this.adminInfo = this.sharedvar.adminInfo;
+      console.log('heyyy', this.adminInfo);
     }
   }
   reload() {
     window.location.reload();
   }
-
 }

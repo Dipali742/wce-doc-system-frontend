@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendUrlComponent } from 'src/app/common/backend-url';
 import { LoadUserDataComponent } from 'src/app/common/load-user-data';
@@ -13,22 +18,20 @@ import { ADocumentActionComponent } from './a-document-action/a-document-action.
 @Component({
   selector: 'app-a-document-types',
   templateUrl: './a-document-types.component.html',
-  styleUrls: ['./a-document-types.component.css']
+  styleUrls: ['./a-document-types.component.css'],
 })
 export class ADocumentTypesComponent implements OnInit {
-
   addDocTypeForm: any;
-  ApprovalFromVar = [
-    "admin",
-    "scholarship"
-  ]
-  constructor(private router: Router,
+  ApprovalFromVar = ['admin', 'scholarship'];
+  constructor(
+    private router: Router,
     private bkd: BackendUrlComponent,
     public sharedvar: SharedVariablesComponent,
     private load_data: LoadUserDataComponent,
     private fb: FormBuilder,
     private userService: UserService,
-    private matDialog: MatDialog) {
+    private matDialog: MatDialog
+  ) {
     this.addDocTypeForm = FormGroup;
   }
 
@@ -43,37 +46,31 @@ export class ADocumentTypesComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       sendTo: new FormControl('', [Validators.required]),
       requiredDoc: new FormControl(''),
-    })
-
+    });
   }
   documentTypesGridColumns: Array<any> = [...DOCUMENT_TYPE_GRID_COLUMNS];
-  documentTypesGridData: any
-  onTabChange(event: { index: number; }) {
+  documentTypesGridData: any;
+  onTabChange(event: { index: number }) {
     if (event.index === 0) {
       this.loadAllDocumentTypes();
     }
   }
   loadAllDocumentTypes() {
     this.userService.getDocumentTypes(this.getUrl()).subscribe(
-      data => {
+      (data) => {
         if (data) {
           this.documentTypesGridData = data;
-          console.log("Hi doc types", this.documentTypesGridData);
-        }
-        else {
-
+          console.log('Hi doc types', this.documentTypesGridData);
+        } else {
         }
         // console.log(data);
       },
-      err => {
-
-      }
+      (err) => {}
     );
   }
 
-
   getUrl(): string {
-    return (this.sharedvar.backend_url + '/documents');
+    return this.sharedvar.backend_url + '/documents';
   }
 
   reload() {
@@ -85,9 +82,7 @@ export class ADocumentTypesComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  documentTypes = [
-    { name: 'Identity card' },
-  ];
+  documentTypes = [{ name: 'Identity card' }];
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -115,94 +110,89 @@ export class ADocumentTypesComponent implements OnInit {
 
   resetForm() {
     this.addDocTypeForm.reset();
-    this.documentTypes = [
-      { name: 'Identity card' },
-    ];
+    this.documentTypes = [{ name: 'Identity card' }];
   }
-  onSubmit() {
 
-    this.documentTypes.forEach(element => {
+  successAlert: Boolean = false;
+  errorFailed: Boolean = false;
+  onSubmit() {
+    this.documentTypes.forEach((element) => {
       this.docTypes.push(element.name);
     });
     this.addDocTypeForm.value.requiredDoc = this.docTypes;
-    console.log(this.addDocTypeForm.value)
-    this.userService.addDocumentTypes(this.getUrl(), this.addDocTypeForm.value).subscribe(
-      data => {
-        if (data) {
-
+    console.log(this.addDocTypeForm.value);
+    this.userService
+      .addDocumentTypes(this.getUrl(), this.addDocTypeForm.value)
+      .subscribe(
+        (data) => {
+          if (data) {
+          } else {
+          }
+          console.log(data);
+          this.successAlert = true;
+          this.resetForm();
+        },
+        (err) => {
+          this.errorFailed = true;
         }
-        else {
-        }
-        console.log(data);
-        this.resetForm();
-      },
-      err => {
-      }
-    );
+      );
   }
 
   openDialog(actionType: string, data: any) {
     const dialogConfig = new MatDialogConfig();
-    if (actionType === "edit_action") {
+    if (actionType === 'edit_action') {
       const modalRef = this.matDialog.open(ADocumentActionComponent, {
         data: {
           ComponentData: data,
-          action: actionType
+          action: actionType,
         },
-        ...this.defaultDialogConfig
+        ...this.defaultDialogConfig,
       });
 
-      modalRef.afterClosed().subscribe(
-        result => {
-          this.loadAllDocumentTypes();
-        }
-      )
-    }
-    else {
+      modalRef.afterClosed().subscribe((result) => {
+        this.loadAllDocumentTypes();
+      });
+    } else {
       const modalRef = this.matDialog.open(ADocumentActionComponent, {
         data: {
           ComponentData: data,
-          action: actionType
+          action: actionType,
         },
-        ...this.defaultDialogConfigDel
+        ...this.defaultDialogConfigDel,
       });
 
-      modalRef.afterClosed().subscribe(
-        result => {
-          this.loadAllDocumentTypes();
-        }
-      )
+      modalRef.afterClosed().subscribe((result) => {
+        this.loadAllDocumentTypes();
+      });
     }
-
-
   }
 
   defaultDialogConfig = {
-    width: "50vw",
-    minWidth: "50vw",
-    maxWidth: "50vw",
-    minHeight: "45vh",
-    maxHeight: "75vh"
-  }
+    width: '50vw',
+    minWidth: '50vw',
+    maxWidth: '50vw',
+    minHeight: '45vh',
+    maxHeight: '75vh',
+  };
 
   defaultDialogConfigDel = {
-    width: "50vw",
-    minWidth: "50vw",
-    maxWidth: "50vw",
-    minHeight: "30vh",
-    maxHeight: "30vh"
-  }
+    width: '50vw',
+    minWidth: '50vw',
+    maxWidth: '50vw',
+    minHeight: '30vh',
+    maxHeight: '30vh',
+  };
 
   clickedOnActions(type: any, column: any, data: any, event: any): void {
-    if (type === 'cellClicked' && column.colId === "actions") {
+    if (type === 'cellClicked' && column.colId === 'actions') {
       console.log(event);
-      if (event.event.target.getAttribute("id") === "edit_action") {
-        console.log("hi");
-        this.openDialog("edit_action", data);
+      if (event.event.target.getAttribute('id') === 'edit_action') {
+        console.log('hi');
+        this.openDialog('edit_action', data);
       }
-      if (event.event.target.getAttribute("id") === "delete_action") {
-        console.log("approve");
-        this.openDialog("delete_action", data);
+      if (event.event.target.getAttribute('id') === 'delete_action') {
+        console.log('approve');
+        this.openDialog('delete_action', data);
       }
     }
     // if(type === 'cellClicked' && column.colId === "files") {

@@ -7,25 +7,25 @@ import { SharedVariablesComponent } from 'src/app/common/shared-variables';
 @Component({
   selector: 'app-u-profile',
   templateUrl: './u-profile.component.html',
-  styleUrls: ['./u-profile.component.css']
+  styleUrls: ['./u-profile.component.css'],
 })
 export class UProfileComponent implements OnInit {
-
-  constructor( private router: Router,
+  userInfo: any;
+  constructor(
+    private router: Router,
     private bkd: BackendUrlComponent,
-    public sharedvar:SharedVariablesComponent,
-    private load_data: LoadUserDataComponent) {
-   
-   }
+    public sharedvar: SharedVariablesComponent,
+    public load_data: LoadUserDataComponent
+  ) {}
 
   ngOnInit(): void {
     // this.reload();
-    if(localStorage['InfoWCEDoc']) {
+    if (localStorage['InfoWCEDoc']) {
       this.load_data.onRefresh();
+      this.userInfo = this.sharedvar.userInfo;
     }
   }
   reload() {
     window.location.reload();
   }
-
 }
