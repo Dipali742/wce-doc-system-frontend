@@ -130,8 +130,12 @@ export class AAllUsersComponent implements OnInit {
   checkPRN() {
     if (
       this.studentDataGridData.find(
-        (a: { prn: any }) =>
+        (a: { prn: any }) => {
+        if(this.addStudentForm.value.prn && a.prn){
           a.prn.toUpperCase() === this.addStudentForm.value.prn.toUpperCase()
+
+        }
+      }
       )
     )
       return true;
