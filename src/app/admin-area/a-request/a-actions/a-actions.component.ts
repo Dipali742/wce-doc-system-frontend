@@ -97,16 +97,22 @@ export class AActionComponent {
     ];
   }
 
+  // admin:[
+  //   "asef"
+  // ];
   OnDecline() {
     console.log(this.currentStatus);
-    console.log('formdata request : ', this.addComment);
+    console.log('formdata request : ', this.addComment.value.comment);
     console.log('formdata request2 : ', this.approveRequestForm);
-
+    const formData1 = new FormData();
+    const admin: Array<String> = this.addComment.value.comment;
+    // this.admin[0]=this.addComment.value.comment;
     const sendDataToBackend = {
-      admin_comments: this.addComment.value.comment,
+      admin_comments: admin,
       status: this.currentStatus,
     };
-
+    formData1.append('admin_comments', this.addComment.value.comment);
+    formData1.append('status', this.currentStatus);
     console.log('back : ', sendDataToBackend);
     this.userService
       .declineRequest(this.getUrlDecline(), sendDataToBackend)
@@ -141,7 +147,7 @@ export class AActionComponent {
     }
     formData.append('admin_comments', this.addComment.value.comment);
     formData.append('status', 'Approved');
-    console.log(this.addComment.value.comment);
+    console.log("Formdata:",formData);
 
     this.userService.declineRequest(this.getUrlApprove(), formData).subscribe(
       (data) => {

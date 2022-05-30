@@ -24,7 +24,7 @@
     </ag-grid-angular>
     <br /><br />
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-4">
         <p>Choose action type</p>
       </div>
       <div class="col-md-10">
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <form [formGroup]="addComment">
+    <!-- <form [formGroup]="addComment">
       <mat-form-field class="col-6">
         <mat-label>Add Comment here</mat-label>
         <textarea
@@ -50,7 +50,7 @@
         </textarea>
         <mat-error>This field is required</mat-error>
       </mat-form-field>
-    </form>
+    </form> -->
   </div>
   <div *ngIf="actionType === 'approve_action'">
     <h1>
@@ -93,24 +93,25 @@
       </div>
     </form>
 
-    <form [formGroup]="addComment">
-      <div>
-        <mat-form-field class="col-6">
-          <mat-label>Add Comment here</mat-label>
-          <textarea
-            matIinput
-            formControlName="comment"
-            matInput
-            type="text"
-            required
-            placeholder="abc"
-          >
-          </textarea>
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-      </div>
-    </form>
+    
   </div>
+  <form [formGroup]="addComment">
+    <div>
+      <mat-form-field class="col-6">
+        <mat-label>Add Comment here</mat-label>
+        <textarea
+          matIinput
+          formControlName="comment"
+          matInput
+          type="text"
+          required
+          placeholder="abc"
+        >
+        </textarea>
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
