@@ -6,6 +6,7 @@ import { LoadUserDataComponent } from 'src/app/common/load-user-data';
 import { SharedVariablesComponent } from 'src/app/common/shared-variables';
 import { UserService } from 'src/app/_services/user.service';
 import { MY_REQUEST_GRID_COLUMNS } from '../grid-columns/my-request-grid-columns';
+import { ARequestActionComponent } from '../u-request/a-request-action/a-request-action.component';
 import { UViewRequestComponent } from './view-action/u-view-request-action.component';
 
 @Component({
@@ -80,6 +81,20 @@ export class UMyRequestComponent implements OnInit {
         ...this.defaultDialogConfig,
       });
     }
+    if (actionType === 'rework_request') {
+      console.log('nishi ');
+      const modalRef = this.matDialog.open(ARequestActionComponent, {
+        data: {
+          ComponentData: data,
+          action: actionType,
+        },
+        ...this.defaultDialogConfig,
+      });
+
+      modalRef.afterClosed().subscribe((result) => {
+        this.loadMyRequests()
+      });
+    }
   }
 
   clickedOnActions(type: any, column: any, data: any, event: any): void {
@@ -91,12 +106,11 @@ export class UMyRequestComponent implements OnInit {
         this.openDialog('view_attachments', data);
       }
     }
-    // if(type === 'cellClicked' && column.colId === "admin_files") {
-    //   console.log("nishi",event);
-    //   if(event.event.target.getAttribute("id") === "file_download") {
-    //     console.log("file download");
-
-    //   }
+    if(type === 'cellClicked' && column.colId === "status") {
+      console.log("nishi",event);
+      if(event.event.target.getAttribute("id") === "rework_request") {
+        this.openDialog('rework_request', data);
+      }
     // }
     // if(type === 'cellClicked' && column.colId === "files") {
     //   console.log(event);
@@ -104,6 +118,6 @@ export class UMyRequestComponent implements OnInit {
     //     console.log("hi");
     //   }
 
-    // }
+    }
   }
 }

@@ -10,6 +10,12 @@ export const MY_REQUEST_GRID_COLUMNS = [
   {
     headerName: 'Status',
     field: 'status',
+    cellRenderer: (params: any) => {
+      if (params.data.status == "rework") {
+        return "<a id='rework_request' style='color:MediumSeaGreen;'>Rework</a>";
+      }
+      return '<p>'+ params.data.status+'</p>';
+    },
     sortable: true,
     filter: true,
   },

@@ -1,6 +1,12 @@
 <mat-dialog-content>
-  <h1>
+  <h1 *ngIf="actionType != 'rework_request'">
     Request Document
+    <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right">
+      <mat-icon matSuffix>close</mat-icon>
+    </button>
+  </h1>
+  <h1 *ngIf="actionType == 'rework_request'">
+    Edit Request
     <button mat-icon-button tabindex="-1" mat-dialog-close style="float: right">
       <mat-icon matSuffix>close</mat-icon>
     </button>
@@ -68,6 +74,7 @@
                   type="text"
                   required
                   placeholder="abc"
+                  [(ngModel)]="dialogData.comments"
                 />
 
                 <mat-error>This field is required</mat-error>
@@ -78,6 +85,28 @@
       </div>
       <br />
       <!-- <div *ngFor="let files of docType.requiredDoc"> -->
+        <!-- <div *ngIf="actionType == 'rework_request'">
+          <div class="col-md-4">
+            <div class="leftside">
+              {{ Previous attachment : docType.requiredDoc }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngFor="let file of DocumentsUploaded; let indexOfelement = index">
+              <div class="row" *ngIf="file.name">
+                <div class="col-md-6">
+                  <div class="leftside">
+                    {{ file.name }}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <a href="{{ file.path }}" download target="_blank">Download</a>
+             
+              <br />
+            </div>  
+          </div>
+        </div>
+        </div> -->
       <div class="row" *ngIf="docType.requiredDoc.length != 0">
         <div class="col-md-2">
           <div class="leftside">

@@ -48,11 +48,19 @@ export class ARequestActionComponent {
   ) {
     this.actionType = data.action;
     this.dialogData = data.ComponentData;
+
+    if(this.actionType === "rework_request") {
+      this.userInfo = this.dialogData.user;
+      this.docType = this.dialogData.document_type;
+    }
+    else {
     this.userInfo = this.dialogData.userInfo;
     this.docType = this.dialogData.data;
+   
+    }
     this.createRequestForm = FormGroup;
     this.addComment = FormGroup;
-    console.log("I'm dialog data : ", this.docType);
+    console.log("I'm dialog data : ", this.dialogData);
   }
 
   ngOnInit() {
@@ -80,14 +88,14 @@ export class ARequestActionComponent {
   successAlert: Boolean = false;
   successMessage = '';
   checkvalid() {
-    console.log('checkvalid');
+   // console.log('checkvalid');
     if (this.docType.requiredDoc.length !== 0) {
       if (this.addComment.value.comment !== '' && this.files.length !== 0) {
         return false;
       }
       return true;
     } else {
-      console.log(this.addComment.value.comment);
+      //console.log(this.addComment.value.comment);
       if (this.addComment.value.comment !== '') {
         return false;
       }
@@ -100,7 +108,34 @@ export class ARequestActionComponent {
 
   OnEdit() {
     console.log(this.file);
-    const formData: any = new FormData();
+    
+
+    
+    if(this.actionType === "rework_request") {
+      const formData: any = new FormData();
+    const files: Array<File> = this.files;
+    console.log(files);
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i], files[i]['name']);
+    }
+    formData.append('status', "pending");
+    formData.append('comments', this.addComment.value.comment);
+    console.log(this.addComment.value.comment);
+      this.userService.updateDocumentType(this.getUrlForUpdate(), formData).subscribe(
+        (data: any) => {
+          if (data) {
+            this.successAlert = true;
+          } else {
+          }
+          // console.log(data);
+        },
+        (err: any) => {
+          this.errorFailed = true;
+        }
+      );
+    }
+    else {
+      const formData: any = new FormData();
     const files: Array<File> = this.files;
     console.log(files);
     for (let i = 0; i < files.length; i++) {
@@ -111,7 +146,6 @@ export class ARequestActionComponent {
     formData.append('requiredValidations', 'scholarship');
     formData.append('comments', this.addComment.value.comment);
     console.log(this.addComment.value.comment);
-
     this.userService.addRequest(this.getUrl(), formData).subscribe(
       (data: any) => {
         if (data) {
@@ -124,12 +158,15 @@ export class ARequestActionComponent {
         this.errorFailed = true;
       }
     );
-
+    }
     setTimeout(() => {
       this.dialogRef.close(), 5000;
     });
   }
 
+  getUrlForUpdate() {
+    return this.sharedvar.backend_url + '/requests/updateRequest/'+this.dialogData._id;
+  }
   OnCancel() {
     this.dialogRef.close();
   }
