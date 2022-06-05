@@ -29,4 +29,10 @@ export const DOCUMENT_TYPE_GRID_COLUMNS = [
     sortable: true,
     filter: true,
   },
+  {
+    headerName: 'Amount',
+    field: 'amount',
+    sortable: true,
+    filter: true,
+  },
 ];

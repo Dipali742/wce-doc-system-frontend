@@ -18,10 +18,60 @@
           sideBar="{toolPanels: ['columns','filters']}"
           [pagination]="true"
           [paginationPageSize]="10"
+          (cellClicked)="
+            clickedOnActions($event.type, $event.column, $event.data, $event)
+          "
         >
         </ag-grid-angular>
       </mat-tab>
       <mat-tab label="Add Student">
+        <!-- <> -->
+        <mat-card>
+          <mat-card>
+            <div class="row">
+              <div class="col-md-6">
+                <h2>Add students using excel</h2>
+                <h5>(File extension - .xlsx)</h5>
+                <h5>
+                  (Column header - prn, fname, lname, email, phone, course,
+                  branch, year )
+                </h5>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <input
+                  formControlName="file"
+                  type="file"
+                  required
+                  placeholder="file"
+                  (change)="onChange($event)"
+                  required
+                  multiple
+                />
+              </div>
+              <div class="col-md-6">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="OnsubmitExcel()"
+                >
+                  <!-- [disabled]="checkValid()" -->
+                  Submit
+                </button>
+              </div>
+            </div>
+            <!-- <div class="col-md-6">
+              <button mat-raised-button color="primary"> -->
+            <!-- [disabled]="checkValid()" -->
+            <!-- Download failed students -->
+            <!-- </button>
+            </div> -->
+          </mat-card>
+        </mat-card>
+
+        <br />
         <form [formGroup]="addStudentForm">
           <div class="ng-grid">
             <div class="row">

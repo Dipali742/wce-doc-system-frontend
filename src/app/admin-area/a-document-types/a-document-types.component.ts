@@ -46,6 +46,7 @@ export class ADocumentTypesComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       sendTo: new FormControl('', [Validators.required]),
       requiredDoc: new FormControl(''),
+      amount: new FormControl('', [Validators.required]),
     });
   }
   documentTypesGridColumns: Array<any> = [...DOCUMENT_TYPE_GRID_COLUMNS];

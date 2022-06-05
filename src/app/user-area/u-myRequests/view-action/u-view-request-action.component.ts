@@ -50,23 +50,22 @@ export class UViewRequestComponent {
 
   ngOnInit() {
     var i: number;
-    for (
-      i = 0;
-      i < this.dialogData.ComponentData.document_type.requiredDoc.length;
-      i++
-    ) {
+    for (i = 0; i < this.dialogData.ComponentData.files.length; i++) {
       console.log(
         this.dialogData.ComponentData.document_type.requiredDoc[i],
         ' ',
         this.dialogData.ComponentData.files[i]
       );
 
-      this.DocumentsUploaded.push({
-        name: this.dialogData.ComponentData.document_type.requiredDoc[i],
-        path:
-          'https://wce-tracker-api.herokuapp.com/' +
-          this.dialogData.ComponentData.files[i].filePath,
-      });
+      if (this.dialogData.ComponentData.files[i].length != 0) {
+        this.DocumentsUploaded.push({
+          name: this.dialogData.ComponentData.document_type.requiredDoc[i],
+          path:
+            'https://wce-tracker-api.herokuapp.com/' +
+            this.dialogData.ComponentData.files[i].filePath,
+        });
+      } else {
+      }
     }
     console.log('sdfsfdfh', this.DocumentsUploaded);
   }

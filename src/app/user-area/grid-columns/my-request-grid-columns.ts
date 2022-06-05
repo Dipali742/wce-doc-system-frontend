@@ -11,10 +11,10 @@ export const MY_REQUEST_GRID_COLUMNS = [
     headerName: 'Status',
     field: 'status',
     cellRenderer: (params: any) => {
-      if (params.data.status == "rework") {
+      if (params.data.status == 'rework') {
         return "<a id='rework_request' style='color:MediumSeaGreen;'>Rework</a>";
       }
-      return '<p>'+ params.data.status+'</p>';
+      return '<p>' + params.data.status + '</p>';
     },
     sortable: true,
     filter: true,
@@ -43,7 +43,10 @@ export const MY_REQUEST_GRID_COLUMNS = [
     headerName: 'Attachments',
     field: 'files',
     cellRenderer: (params: any) => {
-      if (params.data.files.length != 0) {
+      if (
+        params.data.files.length != 0 &&
+        params.data.document_type.requiredDoc.length != 0
+      ) {
         return "<a id='view_attachments' style='color:MediumSeaGreen;'>View</a>";
       }
       return '<p>None</p>';

@@ -85,7 +85,7 @@
       </div>
       <br />
       <!-- <div *ngFor="let files of docType.requiredDoc"> -->
-        <!-- <div *ngIf="actionType == 'rework_request'">
+      <!-- <div *ngIf="actionType == 'rework_request'">
           <div class="col-md-4">
             <div class="leftside">
               {{ Previous attachment : docType.requiredDoc }}
@@ -107,25 +107,28 @@
           </div>
         </div>
         </div> -->
-      <div class="row" *ngIf="docType.requiredDoc.length != 0">
-        <div class="col-md-2">
-          <div class="leftside">
-            {{ docType.requiredDoc }}
+      <div *ngFor="let files of docType.requiredDoc">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="leftside">
+              {{ files }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <input
+              id="{{ files }}"
+              type="file"
+              required
+              placeholder="file"
+              (change)="onChange($event)"
+              required
+              multiple
+            />
           </div>
         </div>
-        <div class="col-md-4">
-          <input
-            id="{{ files }}"
-            type="file"
-            required
-            placeholder="file"
-            (change)="onChange($event)"
-            required
-            multiple
-          />
-        </div>
+        <br />
       </div>
-      <br />
+
       <!-- </div> -->
     </mat-card>
   </mat-card>

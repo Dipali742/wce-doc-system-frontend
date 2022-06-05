@@ -1,0 +1,39 @@
+<mat-dialog-content>
+  <div *ngIf="actionType === 'delete_action'">
+    <h1>
+      <button
+        mat-icon-button
+        tabindex="-1"
+        mat-dialog-close
+        style="float: right"
+      >
+        <mat-icon matSuffix>close</mat-icon>
+      </button>
+    </h1>
+
+    <h1>Are you sure you want to delete student "{{ dialogData.prn }}"</h1>
+    <br />
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- <button class="mat-raised-button" (click)="close()">Close</button> -->
+
+  <button
+    *ngIf="actionType === 'delete_action'"
+    mat-raised-button
+    color="primary"
+    (click)="OnDelete()"
+    style="float: right"
+  >
+    Delete
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="Onsubmit()"
+    style="float: right"
+  >
+    Cancel
+  </button>
+</mat-dialog-actions>

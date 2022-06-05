@@ -17,11 +17,11 @@ import { AProfileComponent } from './admin-area/a-profile/a-profile.component';
 import { ADocumentTypesComponent } from './admin-area/a-document-types/a-document-types.component';
 import { MyMaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HomeComponent} from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {UHelpComponent} from './user-area/u-help/u-help.component';
+import { UHelpComponent } from './user-area/u-help/u-help.component';
 import { AHelpComponent } from './admin-area/a-help/a-help.component';
 import { UMyRequestComponent } from './user-area/u-myRequests/u-myRequests.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -30,6 +30,7 @@ import { AViewRequestComponent } from './admin-area/a-request/a-view-request/a-v
 import { ADocumentActionComponent } from './admin-area/a-document-types/a-document-action/a-document-action.component';
 import { UViewRequestComponent } from './user-area/u-myRequests/view-action/u-view-request-action.component';
 import { ARequestActionComponent } from './user-area/u-request/a-request-action/a-request-action.component';
+import { AUpdateStudentActionComponent } from './admin-area/a-all-users/a-update-student-action/a-update-student-action.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ARequestActionComponent } from './user-area/u-request/a-request-action/
     AViewRequestComponent,
     ADocumentActionComponent,
     UViewRequestComponent,
-    ARequestActionComponent
+    ARequestActionComponent,
+    AUpdateStudentActionComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +67,9 @@ import { ARequestActionComponent } from './user-area/u-request/a-request-action/
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
